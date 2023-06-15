@@ -1,4 +1,13 @@
-.PopulationStatistics-header {
+
+:root {
+    --primary-color: #282c34;
+    --secondary-color: #cbcbcb;
+    --border-color: #ddd;
+    --text-color: #555;
+    --background-color: #c9c0c0;
+    --box-shadow-light: rgba(0,0,0,0.05);
+    --box-shadow-dark: rgba(0,0,0,0.1);
+}.PopulationStatistics-header {
     text-align: center;
     color: #ffffff;
 }
@@ -92,4 +101,33 @@
     border-radius: 4px;
     background: #333;
     color: #ffffff;
+}
+.custom-tooltip {
+    max-width: 300px;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.desc {
+    margin-bottom: 5px;
+}
+
+.tooltip-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.tooltip-section {
+    display: flex;
+    flex-direction: column;
 }
