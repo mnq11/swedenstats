@@ -1,0 +1,50 @@
+.StatisticsComponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #282c34;
+    color: #b00000;
+}
+
+.StatisticsComponent label {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.StatisticsComponent select {
+    margin-top: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #282c34;
+    color: #ffffff;
+}
+
+.StatisticsComponent h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.StatisticsComponent .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.StatisticsComponent .chart {
+    flex: 0 1 400px;
+    margin: 20px;
+    padding: 20px;
+    background: #c9c0c0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.StatisticsComponent .chart:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
