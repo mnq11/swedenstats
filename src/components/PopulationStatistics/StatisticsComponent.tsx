@@ -1,90 +1,14 @@
-import React, {useState} from 'react';
-import {BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, PieChart, Pie, Cell} from 'recharts';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMale, faFemale, faRing, faHeartBroken, faWindowClose, faRibbon} from '@fortawesome/free-solid-svg-icons'
-
-interface StatsData {
-    data: {
-        key: string[],
-        values: string[]
-    }[]
-}
-
-interface Props {
-    statsData: StatsData;
-}
-
-const darkMode = {
-    backgroundColor: "#282c34",
-    axisColor: "#ccc",
-    gridColor: "#666",
-    primaryColor: "#10B981",
-    secondaryColor: "#3B82F6",
-    tertiaryColor: "#6B7280",
-    quaternaryColor: "#D1D5DB",
-    tooltipColor: "#000",
-    tooltipBgColor: "#FFF",
-    fontFamily: "Arial"
-};
-
-
-const CustomTooltipAgeGender = ({active, payload}: any) => {
-    if (active && payload && payload.length) {
-        return (
-            <div className="custom-tooltip">
-                <p className="label">{`Age : ${payload[0].payload.name}`}</p>
-                <p className="desc">{`Population : ${payload[0].value}`}</p>
-                <div className="tooltip-content">
-                    <div className="tooltip-section">
-                        <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'lightskyblue '}} /> {`Male : ${payload[0].payload.Male.Single + payload[0].payload.Male.Married + payload[0].payload.Male.Widowed + payload[0].payload.Male.Divorced}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faRibbon} style={{color: 'lightskyblue '}} /> {`Single : ${payload[0].payload.Male.Single}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faRing} style={{color: 'lightskyblue '}} /> {`Married : ${payload[0].payload.Male.Married}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faWindowClose} style={{color: 'lightskyblue '}} /> {`Widowed : ${payload[0].payload.Male.Widowed}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faHeartBroken} style={{color: 'lightskyblue '}} /> {`Divorced : ${payload[0].payload.Male.Divorced}`}</p>
-                    </div>
-                    <div className="tooltip-section">
-                        <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'pink '}} />{`Female : ${payload[0].payload.Female.Single + payload[0].payload.Female.Married + payload[0].payload.Female.Widowed + payload[0].payload.Female.Divorced}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faRibbon} style={{color: 'pink '}} /> {`Single : ${payload[0].payload.Female.Single}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faRing} style={{color: 'pink '}} /> {`Married : ${payload[0].payload.Female.Married}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faWindowClose} style={{color: 'pink '}} /> {`Widowed : ${payload[0].payload.Female.Widowed}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faHeartBroken} style={{color: 'pink '}} /> {`Divorced : ${payload[0].payload.Female.Divorced}`}</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    return null;
-};
-
-
-const CustomTooltipYear = ({active, payload = []}: any) => {
-    if (active && payload[0]) {
-        return (
-            <div className="custom-tooltip">
-                <div className="tooltip-section">
-                    <p className="label">{`Year : ${payload[0].payload.name}`}</p>
-                    <p className="desc">{`Population : ${payload[0].value}`}</p>
-                    <div className="tooltip-content">
-                        <div className="tooltip-section">
-                            <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'lightskyblue '}} /> {`Male : ${payload[0].payload.Male}`}</p>
-                        </div>
-                        <div className="tooltip-section">
-                            <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'pink '}} />{`Female : ${payload[0].payload.Female}`}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    return null;
-};
+import React, { useState } from 'react';
+import { Parts, MaritalStatusSelector, PopulationBarChart, PopulationPieChart } from "./Charts/Parts";
+import { Props } from "../../types/types";
+import { CustomTooltipAgeGender } from "./tools/CustomTooltipAgeGender";
+import { CustomTooltipYear } from "./tools/CustomTooltipYear";
+import {CustomTooltipMaritalStatus} from "./tools/CustomTooltipMaritalStatus";
 
 
 const StatisticsComponent: React.FC<Props> = ({statsData}) => {
     const [selectedYear, setSelectedYear] = useState('2022');
     const [selectedMaritalStatus, setSelectedMaritalStatus] = useState('All');
-
-    const COLORS = ['#10B981', '#3B82F6', '#6B7280', '#D1D5DB'];
 
     const chartData = statsData.data.map((item, index) => ({
         name: `Data ${index + 1}`,
@@ -114,7 +38,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
 
 
     const maritalStatusPopulationData = chartData.reduce<{
-        [key: string]: { name: string, value: number }
+        [key: string]: { name: string, value: number, maleAgeRange: [number, number], femaleAgeRange: [number, number], maleCount: number, femaleCount: number }
     }>((accumulator, current) => {
         const maritalStatusMap: { [key: string]: string } = {
             'OG': 'Single',
@@ -124,14 +48,36 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         };
 
         const maritalStatus = maritalStatusMap[current.MaritalStatus];
+        const currentAge = parseInt(current.Age);
 
-        if (accumulator[maritalStatus]) {
-            accumulator[maritalStatus].value += current.Population;
-        } else {
-            accumulator[maritalStatus] = {name: maritalStatus, value: current.Population};
+        if (current.Year === selectedYear && currentAge >= 18) {
+            if (accumulator[maritalStatus]) {
+                accumulator[maritalStatus].value += current.Population;
+                if (current.Gender === '1') {
+                    accumulator[maritalStatus].maleCount += current.Population;
+                    accumulator[maritalStatus].maleAgeRange[0] = Math.min(accumulator[maritalStatus].maleAgeRange[0], currentAge);
+                    accumulator[maritalStatus].maleAgeRange[1] = Math.max(accumulator[maritalStatus].maleAgeRange[1], currentAge);
+                } else {
+                    accumulator[maritalStatus].femaleCount += current.Population;
+                    accumulator[maritalStatus].femaleAgeRange[0] = Math.min(accumulator[maritalStatus].femaleAgeRange[0], currentAge);
+                    accumulator[maritalStatus].femaleAgeRange[1] = Math.max(accumulator[maritalStatus].femaleAgeRange[1], currentAge);
+                }
+            } else {
+                accumulator[maritalStatus] = {
+                    name: maritalStatus,
+                    value: current.Population,
+                    maleAgeRange: [Infinity, -Infinity],
+                    femaleAgeRange: [Infinity, -Infinity],
+                    maleCount: current.Gender === '1' ? current.Population : 0,
+                    femaleCount: current.Gender === '2' ? current.Population : 0
+                };
+            }
         }
+
         return accumulator;
     }, {});
+
+
 
     const agePopulationData = filteredData.reduce<{
         [key: string]: {
@@ -190,117 +136,18 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
     })).sort((a, b) => a.name - b.name);
     const genderPopulationChartData = Object.values(genderPopulationData);
     const YEARS = Array.from({length: 2022 - 1968 + 1}, (_, i) => String(2022 - i));
-    const getColor = (value: number) => {
-        const hue=((1-value/100)*120).toString(10);
-        return ["hsl(",hue,",100%,50%)"].join("");
-    }
+
     return (
         <div className="StatisticsComponent">
-            <select value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
-                {YEARS.map(year => <option key={year}>{year}</option>)}
-            </select>
+            <Parts selectedYear={selectedYear} setSelectedYear={setSelectedYear} YEARS={YEARS} />
+            <MaritalStatusSelector selectedMaritalStatus={selectedMaritalStatus} setSelectedMaritalStatus={setSelectedMaritalStatus} maritalStatusPopulationChartData={maritalStatusPopulationChartData} />
 
-            <label>Select Marital Status:
-                <select value={selectedMaritalStatus} onChange={e => setSelectedMaritalStatus(e.target.value)}>
-                    <option key="All">All</option>
-                    {Object.keys(maritalStatusPopulationChartData).map(status => <option
-                        key={status}>{status}</option>)}
-                </select>
-            </label>
             <div className="chart-container">
-                <div className="chart">
-                    <h2>Population by Age in {selectedYear}</h2>
-                    <BarChart width={600} height={300} data={agePopulationChartData}
-                              style={{backgroundColor: darkMode.backgroundColor}}>
-                        <XAxis dataKey="name" stroke={darkMode.axisColor} />
-                        <YAxis stroke={darkMode.axisColor} label={{ value: 'Population', angle: -90, position: 'insideLeft' }}/>
-                        <Tooltip content={<CustomTooltipAgeGender/>}/>
-                        <Legend/>
-                        <CartesianGrid stroke={darkMode.gridColor}/>
-                        <Bar dataKey="value" barSize={10}>
-                            {agePopulationChartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={getColor(entry.name)} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </div>
-                <div className="chart">
-                    <h2>Population by Year</h2>
-                    <BarChart width={600} height={300} data={yearPopulationChartData}>
-                        <XAxis dataKey="name" stroke={darkMode.axisColor}/>
-                        <YAxis stroke={darkMode.axisColor} label={{ value: 'Population', angle: -90, position: 'insideLeft' }}/>
-                        <Tooltip content={<CustomTooltipYear/>}/>
-                        <Legend/>
-                        <CartesianGrid stroke={darkMode.gridColor}/>
-                        <Bar dataKey="value" barSize={10}>
-                            {yearPopulationChartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={getColor(entry.name)} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </div>
+                <PopulationBarChart chartTitle={`Population by Age in ${selectedYear}`} chartData={agePopulationChartData} CustomTooltip={CustomTooltipAgeGender} />
+                <PopulationBarChart chartTitle="Population by Year" chartData={yearPopulationChartData} CustomTooltip={CustomTooltipYear} />
 
-
-                <div className="chart">
-                    <h2>Population by Marital Status in {selectedYear}</h2>
-                    <PieChart width={600} height={300} style={{margin: 'auto'}}>
-                        <Pie
-                            dataKey="value"
-                            isAnimationActive={true} // enable animation
-                            data={maritalStatusPopulationChartData}
-                            cx={200}
-                            cy={200}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            labelLine={true} // hide the line connecting the label to the pie
-                            label={({
-                                        name,
-                                        percent
-                                    }) => `${name}: ${(percent * 100).toFixed(0)}%`} // show percentage in labels
-                        >
-                            {
-                                maritalStatusPopulationChartData.map((entry, index) =>
-                                    <Cell
-                                        key={`cell-${index}`}
-                                        fill={COLORS[index % COLORS.length]}
-                                        stroke="#fff" // add white stroke to make each cell more distinct
-                                        strokeWidth={1}
-                                    />)
-                            }
-                        </Pie>
-                        <Tooltip/>
-                    </PieChart>
-                </div>
-                <div className="chart">
-                    <h2>Population by Gender in {selectedYear}</h2>
-                    <PieChart width={600} height={300} style={{margin: 'auto'}}>
-                        <Pie
-                            dataKey="value"
-                            isAnimationActive={true}
-                            data={genderPopulationChartData}
-                            cx={200}
-                            cy={200}
-                            outerRadius={70}
-                            fill={darkMode.primaryColor}
-                            labelLine={true}
-                            label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                        >
-
-                            {
-                                genderPopulationChartData.map((entry, index) =>
-                                    <Cell
-                                        key={`cell-${index}`}
-                                        fill={COLORS[index % COLORS.length]}
-                                        stroke={darkMode.backgroundColor}
-                                        strokeWidth={1}
-                                    />
-                                )
-                            }
-                        </Pie>
-                        <Tooltip/>
-                    </PieChart>
-                </div>
-
+                <PopulationPieChart chartTitle={`Population by Marital Status in ${selectedYear}`} chartData={Object.values(maritalStatusPopulationData)} CustomTooltip={CustomTooltipMaritalStatus} />
+                <PopulationPieChart chartTitle={`Population by Gender in ${selectedYear}`} chartData={genderPopulationChartData} />
             </div>
         </div>
     );
