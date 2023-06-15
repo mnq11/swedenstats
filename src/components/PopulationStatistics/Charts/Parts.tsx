@@ -11,8 +11,8 @@ import {
     Pie,
     Cell
 } from 'recharts';
-import { darkMode, COLORS } from "../../../styles/styles";
-import { getColor } from "../../../utils/utils";
+import {darkMode, COLORS} from "../../../styles/styles";
+import {getColor} from "../../../utils/utils";
 
 // Define the types of props
 type YearSelectorProps = {
@@ -38,26 +38,36 @@ type PopulationPieChartProps = {
     chartData: any[], // replace 'any' with your actual data type
     CustomTooltip?: React.ComponentType<any> // replace 'any' with the actual props of your custom tooltip component
 };
+export type AgeRange = {
+    start: number;
+    end: number;
+    count: number;
+};
+
 export type PayloadType = {
     payload: {
-        maleAgeRange: [number, number],
-        femaleAgeRange: [number, number],
-        maleCount: number,
-        femaleCount: number,
+        maleAgeGroups: AgeRange[];
+        femaleAgeGroups: AgeRange[];
+        maleCount: number;
+        femaleCount: number;
     },
     value: number
-    name :String
+    name: String
 };
 
 
 // Functional Components
-export const Parts: React.FC<YearSelectorProps> = ({ selectedYear, setSelectedYear, YEARS }) => (
+export const Parts: React.FC<YearSelectorProps> = ({selectedYear, setSelectedYear, YEARS}) => (
     <select value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
         {YEARS.map(year => <option key={year}>{year}</option>)}
     </select>
 );
 
-export const MaritalStatusSelector: React.FC<MaritalStatusSelectorProps> = ({ selectedMaritalStatus, setSelectedMaritalStatus, maritalStatusPopulationChartData }) => (
+export const MaritalStatusSelector: React.FC<MaritalStatusSelectorProps> = ({
+                                                                                selectedMaritalStatus,
+                                                                                setSelectedMaritalStatus,
+                                                                                maritalStatusPopulationChartData
+                                                                            }) => (
     <label>Select Marital Status:
         <select value={selectedMaritalStatus} onChange={e => setSelectedMaritalStatus(e.target.value)}>
             <option key="All">All</option>
@@ -67,26 +77,26 @@ export const MaritalStatusSelector: React.FC<MaritalStatusSelectorProps> = ({ se
     </label>
 );
 
-export const PopulationBarChart: React.FC<PopulationBarChartProps> = ({ chartTitle, chartData, CustomTooltip }) => (
+export const PopulationBarChart: React.FC<PopulationBarChartProps> = ({chartTitle, chartData, CustomTooltip}) => (
     <div className="chart">
         <h2>{chartTitle}</h2>
         <BarChart width={600} height={300} data={chartData}
                   style={{backgroundColor: darkMode.backgroundColor}}>
-            <XAxis dataKey="name" stroke={darkMode.axisColor} />
-            <YAxis stroke={darkMode.axisColor} label={{ value: 'Population', angle: -90, position: 'insideLeft' }}/>
+            <XAxis dataKey="name" stroke={darkMode.axisColor}/>
+            <YAxis stroke={darkMode.axisColor} label={{value: 'Population', angle: -90, position: 'insideLeft'}}/>
             <Tooltip content={<CustomTooltip/>}/>
             <Legend/>
             <CartesianGrid stroke={darkMode.gridColor}/>
             <Bar dataKey="value" barSize={10}>
                 {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={getColor(entry.name)} />
+                    <Cell key={`cell-${index}`} fill={getColor(entry.name)}/>
                 ))}
             </Bar>
         </BarChart>
     </div>
 );
 
-export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({ chartTitle, chartData, CustomTooltip }) => (
+export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({chartTitle, chartData, CustomTooltip}) => (
     <div className="chart">
         <h2>{chartTitle}</h2>
         <PieChart width={600} height={300} style={{margin: 'auto'}}>
@@ -99,7 +109,7 @@ export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({ chartTit
                 outerRadius={80}
                 fill="#8884d8"
                 labelLine={true}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
             >
                 {chartData.map((entry, index) =>
                     <Cell
@@ -110,7 +120,7 @@ export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({ chartTit
                     />)
                 }
             </Pie>
-            {CustomTooltip && <Tooltip content={<CustomTooltip />}/>}
+            {CustomTooltip && <Tooltip content={<CustomTooltip/>}/>}
         </PieChart>
     </div>
 );

@@ -38,7 +38,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
 
 
     const maritalStatusPopulationData = chartData.reduce<{
-        [key: string]: { name: string, value: number, maleAgeRange: [number, number], femaleAgeRange: [number, number], maleCount: number, femaleCount: number }
+        [key: string]: { name: string, value: number, maleAgeGroups: { [key: string]: number }, femaleAgeGroups: { [key: string]: number }, maleCount: number, femaleCount: number }
     }>((accumulator, current) => {
         const maritalStatusMap: { [key: string]: string } = {
             'OG': 'Single',
@@ -51,31 +51,45 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         const currentAge = parseInt(current.Age);
 
         if (current.Year === selectedYear && currentAge >= 18) {
+            let ageGroup;
+            if (currentAge < 20) {
+                ageGroup = '18 - 19';
+            } else {
+                // Calculate the age group by 10 year intervals starting from 20
+                ageGroup = `${Math.floor(currentAge / 10) * 10} - ${Math.floor(currentAge / 10) * 10 + 9}`;
+            }
+
             if (accumulator[maritalStatus]) {
                 accumulator[maritalStatus].value += current.Population;
+
                 if (current.Gender === '1') {
                     accumulator[maritalStatus].maleCount += current.Population;
-                    accumulator[maritalStatus].maleAgeRange[0] = Math.min(accumulator[maritalStatus].maleAgeRange[0], currentAge);
-                    accumulator[maritalStatus].maleAgeRange[1] = Math.max(accumulator[maritalStatus].maleAgeRange[1], currentAge);
+                    accumulator[maritalStatus].maleAgeGroups[ageGroup] = (accumulator[maritalStatus].maleAgeGroups[ageGroup] || 0) + current.Population;
                 } else {
                     accumulator[maritalStatus].femaleCount += current.Population;
-                    accumulator[maritalStatus].femaleAgeRange[0] = Math.min(accumulator[maritalStatus].femaleAgeRange[0], currentAge);
-                    accumulator[maritalStatus].femaleAgeRange[1] = Math.max(accumulator[maritalStatus].femaleAgeRange[1], currentAge);
+                    accumulator[maritalStatus].femaleAgeGroups[ageGroup] = (accumulator[maritalStatus].femaleAgeGroups[ageGroup] || 0) + current.Population;
                 }
             } else {
                 accumulator[maritalStatus] = {
                     name: maritalStatus,
                     value: current.Population,
-                    maleAgeRange: [Infinity, -Infinity],
-                    femaleAgeRange: [Infinity, -Infinity],
+                    maleAgeGroups: {},
+                    femaleAgeGroups: {},
                     maleCount: current.Gender === '1' ? current.Population : 0,
                     femaleCount: current.Gender === '2' ? current.Population : 0
                 };
+
+                if (current.Gender === '1') {
+                    accumulator[maritalStatus].maleAgeGroups[ageGroup] = current.Population;
+                } else {
+                    accumulator[maritalStatus].femaleAgeGroups[ageGroup] = current.Population;
+                }
             }
         }
 
         return accumulator;
     }, {});
+
 
 
 

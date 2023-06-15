@@ -1,41 +1,40 @@
-import {PayloadType} from "../Charts/Parts";
+import { AgeRange, PayloadType } from "../Charts/Parts";
+import React from "react";
 
 export const CustomTooltipMaritalStatus: React.FC<{ active: boolean, payload: PayloadType[], label: string }> =
-    ({active, payload, label}) => {
+    ({ active, payload, label }) => {
         if (active) {
-            let maleAgeRange;
-            if (payload[0].payload.maleAgeRange[0] === Infinity) {
-                maleAgeRange = 'Not available';
-            } else if (payload[0].payload.maleAgeRange[0] === payload[0].payload.maleAgeRange[1]) {
-                maleAgeRange = `Age: ${payload[0].payload.maleAgeRange[0]}`;
-            } else {
-                maleAgeRange = `Age: ${payload[0].payload.maleAgeRange[0]} - ${payload[0].payload.maleAgeRange[1]}`;
-            }
+            const maleAgeGroups = payload[0]?.payload?.maleAgeGroups;
+            const femaleAgeGroups = payload[0]?.payload?.femaleAgeGroups;
+            const maleCount = payload[0]?.payload?.maleCount;
+            const femaleCount = payload[0]?.payload?.femaleCount;
 
-            let femaleAgeRange;
-            if (payload[0].payload.femaleAgeRange[0] === Infinity) {
-                femaleAgeRange = 'Not available';
-            } else if (payload[0].payload.femaleAgeRange[0] === payload[0].payload.femaleAgeRange[1]) {
-                femaleAgeRange = `Age: ${payload[0].payload.femaleAgeRange[0]}`;
-            } else {
-                femaleAgeRange = `Age: ${payload[0].payload.femaleAgeRange[0]} - ${payload[0].payload.femaleAgeRange[1]}`;
-            }
+            const maleAgesArray = maleAgeGroups ? Object.entries(maleAgeGroups) : [];
+            const femaleAgesArray = femaleAgeGroups ? Object.entries(femaleAgeGroups) : [];
 
             return (
                 <div className="custom-tooltip">
                     <p>{`Status: ${payload[0].name}`}</p>
                     <p>{`Total: ${payload[0].value}`}</p>
-                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <div>
-                            <p>{`Males: ${payload[0].payload.maleCount}`}</p>
-                            <p>{maleAgeRange}</p>
+                            <p>{`Males: ${maleCount}`}</p>
+                            {maleAgesArray.map(([ageRange, count], index) => (
+                                <div key={index}>
+                                    <p>{`(${ageRange}) : ${count}`}</p>
+                                </div>
+                            ))}
                         </div>
-                        <div style={{margin: '0 20px'}}>
+                        <div style={{ margin: '0 20px' }}>
                             <p>|</p>
                         </div>
                         <div>
-                            <p>{`Females: ${payload[0].payload.femaleCount}`}</p>
-                            <p>{femaleAgeRange}</p>
+                            <p>{`Females: ${femaleCount}`}</p>
+                            {femaleAgesArray.map(([ageRange, count], index) => (
+                                <div key={index}>
+                                    <p>{`(${ageRange}) : ${count}`}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
