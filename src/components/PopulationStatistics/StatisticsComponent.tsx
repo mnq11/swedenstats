@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, PieChart, Pie, Cell} from 'recharts';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMale, faFemale, faRing, faHeartBroken, faWindowClose} from '@fortawesome/free-solid-svg-icons'
-
+import {faMale, faFemale, faRing, faHeartBroken, faWindowClose, faRibbon} from '@fortawesome/free-solid-svg-icons'
+import { LabelList } from 'recharts';
 interface StatsData {
     data: {
         key: string[],
@@ -42,18 +42,18 @@ const CustomTooltipAgeGender = ({active, payload}: any) => {
                 <p className="desc">{`Population : ${payload[0].value}`}</p>
                 <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px'}}>
                     <div>
-                        <p className="desc">{`Male : ${payload[0].payload.Male.Single + payload[0].payload.Male.Married + payload[0].payload.Male.Widowed + payload[0].payload.Male.Divorced}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'green'}} /> {`Single : ${payload[0].payload.Male.Single}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'blue'}} /> {`Married : ${payload[0].payload.Male.Married}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'grey'}} /> {`Widowed : ${payload[0].payload.Male.Widowed}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'red'}} /> {`Divorced : ${payload[0].payload.Male.Divorced}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faMale} style={{color: 'lightskyblue '}} /> {`Male : ${payload[0].payload.Male.Single + payload[0].payload.Male.Married + payload[0].payload.Male.Widowed + payload[0].payload.Male.Divorced}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faRibbon} style={{color: 'lightskyblue '}} /> {`Single : ${payload[0].payload.Male.Single}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faRing} style={{color: 'lightskyblue '}} /> {`Married : ${payload[0].payload.Male.Married}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faWindowClose} style={{color: 'lightskyblue '}} /> {`Widowed : ${payload[0].payload.Male.Widowed}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faHeartBroken} style={{color: 'lightskyblue '}} /> {`Divorced : ${payload[0].payload.Male.Divorced}`}</p>
                     </div>
                     <div>
-                        <p className="desc">{`Female : ${payload[0].payload.Female.Single + payload[0].payload.Female.Married + payload[0].payload.Female.Widowed + payload[0].payload.Female.Divorced}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'green'}} /> {`Single : ${payload[0].payload.Female.Single}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'blue'}} /> {`Married : ${payload[0].payload.Female.Married}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'grey'}} /> {`Widowed : ${payload[0].payload.Female.Widowed}`}</p>
-                        <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'red'}} /> {`Divorced : ${payload[0].payload.Female.Divorced}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faFemale} style={{color: 'pink '}} />{`Female : ${payload[0].payload.Female.Single + payload[0].payload.Female.Married + payload[0].payload.Female.Widowed + payload[0].payload.Female.Divorced}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faRibbon} style={{color: 'pink '}} /> {`Single : ${payload[0].payload.Female.Single}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faRing} style={{color: 'pink '}} /> {`Married : ${payload[0].payload.Female.Married}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faWindowClose} style={{color: 'pink '}} /> {`Widowed : ${payload[0].payload.Female.Widowed}`}</p>
+                        <p className="desc"><FontAwesomeIcon icon={faHeartBroken} style={{color: 'pink '}} /> {`Divorced : ${payload[0].payload.Female.Divorced}`}</p>
                     </div>
                 </div>
             </div>
@@ -204,13 +204,14 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
                     <BarChart width={600} height={300} data={agePopulationChartData}
                               style={{backgroundColor: darkMode.backgroundColor}}>
                         <XAxis dataKey="name" stroke={darkMode.axisColor}/>
-                        <YAxis stroke={darkMode.axisColor}/>
+                        <YAxis stroke={darkMode.axisColor} label={{ value: 'Age', angle: -90, position: 'insideLeft' }}/>
                         <Tooltip content={<CustomTooltipAgeGender/>}/>
                         <Legend/>
                         <CartesianGrid stroke={darkMode.gridColor}/>
-                        <Bar dataKey="value" barSize={20} fill={darkMode.primaryColor}/>
+                        <Bar dataKey="value" barSize={20} fill={darkMode.primaryColor}>
+                            <LabelList dataKey="name" position="top" />
+                        </Bar>
                     </BarChart>
-
                 </div>
                 <div className="chart">
                     <h2>Population by Year</h2>
