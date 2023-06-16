@@ -1,14 +1,50 @@
 import React, { useState } from 'react';
-import { Parts, MaritalStatusSelector, PopulationBarChart, PopulationPieChart } from "./Charts/Parts";
-import { Props } from "../../types/types";
+import { Props } from "../../../types/types";
 import { CustomTooltipAgeGender } from "./tools/CustomTooltipAgeGender";
 import { CustomTooltipYear } from "./tools/CustomTooltipYear";
 import {CustomTooltipMaritalStatus} from "./tools/CustomTooltipMaritalStatus";
+import {PopulationBarChart} from "./Charts/PopulationBarChart";
+import {PopulationPieChart} from "./Charts/PopulationPieChart";
+import {Parts} from "./Charts/yearSeelctor";
+import styled from "styled-components";
+const StatisticsContainer = styled.div`
+  width: 100%; // Ensure it fills parent's width
+  height: 100%; // Ensure it fills parent's height
+  padding: 3rem;
+  background-color: #282c34;
+  box-sizing: border-box;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+  color: #f1f1f1;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+`;
+
+const ChartContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  gap: 5rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: #f1f1f1; 
+  transition: all 0.3s ease;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
 
 
 const StatisticsComponent: React.FC<Props> = ({statsData}) => {
     const [selectedYear, setSelectedYear] = useState('2022');
-    const [selectedMaritalStatus, setSelectedMaritalStatus] = useState('All');
+    const selectedMaritalStatus = 'All';
 
     const chartData = statsData.data.map((item, index) => ({
         name: `Data ${index + 1}`,
@@ -143,27 +179,24 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         ...obj,
         name: parseInt(obj.name)
     })).sort((a, b) => a.name - b.name);
-    const maritalStatusPopulationChartData = Object.values(maritalStatusPopulationData);
+    Object.values(maritalStatusPopulationData);
     const agePopulationChartData = Object.values(agePopulationData).map(obj => ({
         ...obj,
         name: parseInt(obj.name)
     })).sort((a, b) => a.name - b.name);
-    const genderPopulationChartData = Object.values(genderPopulationData);
+    Object.values(genderPopulationData);
     const YEARS = Array.from({length: 2022 - 1968 + 1}, (_, i) => String(2022 - i));
 
     return (
-        <div className="StatisticsComponent">
+        <StatisticsContainer>
             <Parts selectedYear={selectedYear} setSelectedYear={setSelectedYear} YEARS={YEARS} />
-            <MaritalStatusSelector selectedMaritalStatus={selectedMaritalStatus} setSelectedMaritalStatus={setSelectedMaritalStatus} maritalStatusPopulationChartData={maritalStatusPopulationChartData} />
 
-            <div className="chart-container">
+            <ChartContainer>
                 <PopulationBarChart chartTitle={`Population by Age in ${selectedYear}`} chartData={agePopulationChartData} CustomTooltip={CustomTooltipAgeGender} />
                 <PopulationBarChart chartTitle="Population by Year" chartData={yearPopulationChartData} CustomTooltip={CustomTooltipYear} />
-
                 <PopulationPieChart chartTitle={`Population by Marital Status in ${selectedYear}`} chartData={Object.values(maritalStatusPopulationData)} CustomTooltip={CustomTooltipMaritalStatus} />
-                <PopulationPieChart chartTitle={`Population by Gender in ${selectedYear}`} chartData={genderPopulationChartData} />
-            </div>
-        </div>
+            </ChartContainer>
+        </StatisticsContainer>
     );
 }
 

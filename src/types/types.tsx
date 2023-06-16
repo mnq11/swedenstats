@@ -13,12 +13,6 @@ export interface Props {
 }
 
 
-export type YearSelectorProps = {
-    selectedYear: string,
-    setSelectedYear: (year: string) => void,
-    YEARS: string[]
-};
-
 export type MaritalStatusSelectorProps = {
     selectedMaritalStatus: string,
     setSelectedMaritalStatus: (status: string) => void,
