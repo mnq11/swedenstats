@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import { YearSelectorProps } from "../../../../types/Parts";
+import { YearSelectorProps } from "../types/Parts";
 
 const YearSelectorContainer = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Props } from "../../../types/types";
+import { Props } from "./types/types";
 import { CustomTooltipAgeGender } from "./tools/CustomTooltipAgeGender";
 import { CustomTooltipYear } from "./tools/CustomTooltipYear";
 import {CustomTooltipMaritalStatus} from "./tools/CustomTooltipMaritalStatus";
@@ -7,40 +7,15 @@ import {PopulationBarChart} from "./Charts/PopulationBarChart";
 import {PopulationPieChart} from "./Charts/PopulationPieChart";
 import {Parts} from "./Charts/yearSeelctor";
 import styled from "styled-components";
-const StatisticsContainer = styled.div`
-  width: 100%; // Ensure it fills parent's width
-  height: 100%; // Ensure it fills parent's height
-  padding: 3rem;
-  background-color: #282c34;
-  box-sizing: border-box;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  font-family: 'Roboto', sans-serif;
-  color: #f1f1f1;
 
-  @media (max-width: 768px) {
-    padding: 2rem;
-  }
-`;
-
-const ChartContainer = styled.div`
+const StatisticsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-  gap: 5rem;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-  color: #f1f1f1; 
-  transition: all 0.3s ease;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: center;
-  }
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  gap: 5px; // provide space between child components
 `;
-
 
 const StatisticsComponent: React.FC<Props> = ({statsData}) => {
     const [selectedYear, setSelectedYear] = useState('2022');
@@ -188,15 +163,24 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
     const YEARS = Array.from({length: 2022 - 1968 + 1}, (_, i) => String(2022 - i));
 
     return (
-        <StatisticsContainer>
+        <StatisticsWrapper>
             <Parts selectedYear={selectedYear} setSelectedYear={setSelectedYear} YEARS={YEARS} />
-
-            <ChartContainer>
-                <PopulationBarChart chartTitle={`Population by Age in ${selectedYear}`} chartData={agePopulationChartData} CustomTooltip={CustomTooltipAgeGender} />
-                <PopulationBarChart chartTitle="Population by Year" chartData={yearPopulationChartData} CustomTooltip={CustomTooltipYear} />
-                <PopulationPieChart chartTitle={`Population by Marital Status in ${selectedYear}`} chartData={Object.values(maritalStatusPopulationData)} CustomTooltip={CustomTooltipMaritalStatus} />
-            </ChartContainer>
-        </StatisticsContainer>
+            <PopulationBarChart
+                chartTitle={`Population by Age in ${selectedYear}`}
+                chartData={agePopulationChartData}
+                CustomTooltip={CustomTooltipAgeGender}
+            />
+            <PopulationBarChart
+                chartTitle="Population by Year"
+                chartData={yearPopulationChartData}
+                CustomTooltip={CustomTooltipYear}
+            />
+            <PopulationPieChart
+                chartTitle={`Population by Marital Status in ${selectedYear}`}
+                chartData={Object.values(maritalStatusPopulationData)}
+                CustomTooltip={CustomTooltipMaritalStatus}
+            />
+        </StatisticsWrapper>
     );
 }
 

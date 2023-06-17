@@ -6,38 +6,76 @@ import {
     ResponsiveContainer
 } from 'recharts';
 import styled from 'styled-components';
-import {COLORS} from "../../../../styles/styles";
-import {PopulationPieChartProps} from "../../../../types/Parts";
+import { COLORS } from "../../../../styles/styles";
+import { PopulationPieChartProps } from "../types/Parts";
 import React from "react";
 
-const MainContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; // Aligns the title and chart vertically
-  height: 100vh; // Takes the full height
-`;
+interface LabelProps {
+    cx: number,
+    cy: number,
+    midAngle: number,
+    innerRadius: number,
+    outerRadius: number,
+    percent: number,
+    index: number,
+    name: string
+}
+
 
 const ChartContainer = styled.div`
   background: #282c34;
-  margin: 2rem;
-  padding: 1rem;
   border-radius: 10px;
-  height: 90vh; // 90% of viewport height
-  width: 90vw; // 90% of viewport width
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ChartTitle = styled.h2`
   color: #d3bcbc;
   text-align: center;
-  margin-bottom: 1rem; // Creates some space between the title and the chart
+  margin-bottom: 2em;
 `;
 
+// Customized Label component
+const renderCustomizedLabel: React.FC<LabelProps & {name: string}> = ({
+                                                                          cx,
+                                                                          cy,
+                                                                          midAngle,
+                                                                          innerRadius,
+                                                                          outerRadius,
+                                                                          percent,
+                                                                          index,
+                                                                          name
+                                                                      }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = 25 + innerRadius + (outerRadius - innerRadius);
+    const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy  + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+        <text
+            x={x}
+            y={y}
+            fill={COLORS[index % COLORS.length]}
+            textAnchor={x > cx ? 'start' : 'end'}
+            dominantBaseline="central"
+        >
+            {`${name}: ${(percent * 100).toFixed(0)}%`}
+        </text>
+    );
+};
+
+
+
+
+
 export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({chartTitle, chartData, CustomTooltip}) => (
-    <MainContainer>
+    <>
         <ChartTitle>{chartTitle}</ChartTitle>
         <ChartContainer>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="80%" height="80%">
                 <PieChart>
                     <Pie
                         dataKey="value"
@@ -45,23 +83,24 @@ export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({chartTitl
                         data={chartData}
                         cx="50%"
                         cy="50%"
-                        outerRadius="50%"
+                        outerRadius="70%"
                         fill="#8884d8"
-                        labelLine={true}
-                        label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                        labelLine={false}
+                        label={renderCustomizedLabel}
+
                     >
-                        {chartData.map((entry, index) =>
+                        {chartData.map((entry, index) => (
                             <Cell
                                 key={`cell-${index}`}
                                 fill={COLORS[index % COLORS.length]}
-                                stroke="#fff"
-                                strokeWidth={1}
-                            />)
-                        }
+                                stroke="#282c34"
+                                strokeWidth={2}
+                            />
+                        ))}
                     </Pie>
-                    {CustomTooltip && <Tooltip content={<CustomTooltip/>}/>}
+                    {CustomTooltip && <Tooltip content={<CustomTooltip />}/>}
                 </PieChart>
             </ResponsiveContainer>
         </ChartContainer>
-    </MainContainer>
+    </>
 );

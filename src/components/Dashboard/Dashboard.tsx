@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import PopulationStatistics from "./PopulationStatistics/PopulationStatistics";
 
+export const countiesData = require('./CountiesData.json') as CountiesData;
+export interface MunicipalityData {
+    Code: string;
+    Municipality: string;
+    Area: number;
+}
+
+export interface CountiesData {
+    [key: string]: MunicipalityData[];
+}
 const DashboardContainer = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -9,9 +19,9 @@ const DashboardContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif ;
-  border-radius: 20px; // Added border-radius for a 'fluffy' look
+  border-radius: 20px; 
 
-  transition: all 0.3s ease; // Add a transition for smooth changes on resize
+  transition: all 0.3s ease; 
 
   @media (max-width: 768px) {
     padding: 15px;
@@ -27,9 +37,12 @@ const DashboardContainer = styled.div`
 `;
 
 const Dashboard = () => {
+    const [county, setCounty] = useState(Object.keys(countiesData)[0]);
+    const [municipality, setMunicipality] = useState(countiesData[Object.keys(countiesData)[0]][0].Code);
+
     return (
         <DashboardContainer>
-            <PopulationStatistics />
+            <PopulationStatistics county={county} setCounty={setCounty} municipality={municipality} setMunicipality={setMunicipality} />
         </DashboardContainer>
     );
 };

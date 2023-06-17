@@ -1,4 +1,4 @@
-import { PayloadType } from "../../../../types/Parts";
+import { PayloadType } from "../types/Parts";
 import React from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faMale, faFemale, faChartPie} from '@fortawesome/free-solid-svg-icons'

@@ -1,8 +1,9 @@
 // PopulationStatistics.tsx
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import StatisticsComponent from './StatisticsComponent';
 import styled from "styled-components";
-const countiesData = require('./CountiesData.json') as CountiesData;
+import {countiesData, MunicipalityData} from "../Dashboard";
+
 
 interface StatsData {
     data: {
@@ -11,16 +12,13 @@ interface StatsData {
     }[]
 }
 
-interface MunicipalityData {
-    Code: string;
-    Municipality: string;
-    Area: number;
-}
 
-interface CountiesData {
-    [key: string]: MunicipalityData[];
+interface PopulationStatisticsProps {
+    county: string;
+    setCounty: (county: string) => void;
+    municipality: string;
+    setMunicipality: (municipality: string) => void;
 }
-
 const PopulationStatisticsContainer = styled.div`
   width: 100%;
   height: 100%; // added to take full height
@@ -34,7 +32,7 @@ const PopulationStatisticsContainer = styled.div`
 
 const PopulationStatisticsHeader = styled.header`
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   @media (max-width: 600px) {
     padding: 10px;
   }
@@ -97,12 +95,9 @@ const Select = styled.select`
 `;
 
 
-
-const PopulationStatistics: React.FC = () => {
+const PopulationStatistics: React.FC<PopulationStatisticsProps> = ({county, setCounty, municipality, setMunicipality}) => {
     const [data, setData] = useState<StatsData | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [county, setCounty] = useState(Object.keys(countiesData)[0]);
-    const [municipality, setMunicipality] = useState(countiesData[Object.keys(countiesData)[0]][0].Code);
     const maritalStatus = {'OG': true, 'G': true, 'ÄNKL': true, 'SK': true};
     const ages = Array.from({length: 99}, (_, i) => String(i + 1)); // Array of ages from 1 to 99
     const gender = {'1': true, '2': true};
@@ -172,20 +167,21 @@ const PopulationStatistics: React.FC = () => {
             <PopulationStatisticsHeader>
                 <Title color='#ad9696'>Sweden Population Statistics</Title>
                 <Label>
-                    County:
+                    <h1>County</h1>
+
                     <Select value={county} onChange={e => {
                         setCounty(e.target.value);
                         setMunicipality(countiesData[e.target.value][0].Code);
                     }}>
                         {countyOptions.map(county => (
-                            <option key={county} value={county} >
+                            <option key={county} value={county}>
                                 {county}
                             </option>
                         ))}
                     </Select>
                 </Label>
                 <Label>
-                    Municipality:
+                    <h1>Municipality</h1>
                     <Select value={municipality} onChange={e => setMunicipality(e.target.value)}>
                         {municipalityOptions.map((item: MunicipalityData) => (
                             <option key={item.Code} value={item.Code}>
@@ -194,7 +190,11 @@ const PopulationStatistics: React.FC = () => {
                         ))}
                     </Select>
                 </Label>
-                <StatisticsComponent statsData={data} />
+                <Label>
+                    <StatisticsComponent statsData={data}/>
+
+                </Label>
+
             </PopulationStatisticsHeader>
         </PopulationStatisticsContainer>
     );

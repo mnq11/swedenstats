@@ -11,4 +11,3 @@ export const darkMode = {
     fontFamily: "Arial"
 };
 export const COLORS = ['#10B981', '#3B82F6', '#6B7280', '#D1D5DB'];
-
