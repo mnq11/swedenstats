@@ -1,0 +1,1494 @@
+{
+    "Stockholm": [
+        {
+            "Code": "0127",
+            "Municipality": "Botkyrka",
+            "Area": 222.32
+        },
+        {
+            "Code": "0162",
+            "Municipality": "Danderyd",
+            "Area": 32.67
+        },
+        {
+            "Code": "0125",
+            "Municipality": "Ekerö",
+            "Area": 383.61
+        },
+        {
+            "Code": "0136",
+            "Municipality": "Haninge",
+            "Area": 2160.87
+        },
+        {
+            "Code": "0126",
+            "Municipality": "Huddinge",
+            "Area": 140.63
+        },
+        {
+            "Code": "0123",
+            "Municipality": "Järfälla",
+            "Area": 63.02
+        },
+        {
+            "Code": "0186",
+            "Municipality": "Lidingö",
+            "Area": 51.05
+        },
+        {
+            "Code": "0182",
+            "Municipality": "Nacka",
+            "Area": 128.83
+        },
+        {
+            "Code": "0188",
+            "Municipality": "Norrtälje",
+            "Area": 5869.67
+        },
+        {
+            "Code": "0140",
+            "Municipality": "Nykvarn",
+            "Area": 176.99
+        },
+        {
+            "Code": "0192",
+            "Municipality": "Nynäshamn",
+            "Area": 1300.83
+        },
+        {
+            "Code": "0128",
+            "Municipality": "Salem",
+            "Area": 71.09
+        },
+        {
+            "Code": "0191",
+            "Municipality": "Sigtuna",
+            "Area": 349.74
+        },
+        {
+            "Code": "0163",
+            "Municipality": "Sollentuna",
+            "Area": 57.98
+        },
+        {
+            "Code": "0184",
+            "Municipality": "Solna",
+            "Area": 21.66
+        },
+        {
+            "Code": "0180",
+            "Municipality": "Stockholm",
+            "Area": 214.63
+        },
+        {
+            "Code": "0183",
+            "Municipality": "Sundbyberg",
+            "Area": 8.77
+        },
+        {
+            "Code": "0181",
+            "Municipality": "Södertälje",
+            "Area": 694.24
+        },
+        {
+            "Code": "0138",
+            "Municipality": "Tyresö",
+            "Area": 100.53
+        },
+        {
+            "Code": "0160",
+            "Municipality": "Täby",
+            "Area": 71.22
+        },
+        {
+            "Code": "0114",
+            "Municipality": "Upplands Väsby",
+            "Area": 83.81
+        },
+        {
+            "Code": "0139",
+            "Municipality": "Upplands-Bro",
+            "Area": 325.23
+        },
+        {
+            "Code": "0115",
+            "Municipality": "Vallentuna",
+            "Area": 368.97
+        },
+        {
+            "Code": "0187",
+            "Municipality": "Vaxholm",
+            "Area": 107.07
+        },
+        {
+            "Code": "0120",
+            "Municipality": "Värmdö",
+            "Area": 2980.11
+        },
+        {
+            "Code": "0117",
+            "Municipality": "Österåker",
+            "Area": 554.46
+        }
+    ],
+    "Uppsala": [
+        {
+            "Code": "0381",
+            "Municipality": "Enköping",
+            "Area": 1323.82
+        },
+        {
+            "Code": "0331",
+            "Municipality": "Heby",
+            "Area": 1225.6
+        },
+        {
+            "Code": "0305",
+            "Municipality": "Håbo",
+            "Area": 186.47
+        },
+        {
+            "Code": "0330",
+            "Municipality": "Knivsta",
+            "Area": 295.12
+        },
+        {
+            "Code": "0360",
+            "Municipality": "Tierp",
+            "Area": 2573.82
+        },
+        {
+            "Code": "0380",
+            "Municipality": "Uppsala",
+            "Area": 2234.47
+        },
+        {
+            "Code": "0319",
+            "Municipality": "Älvkarleby",
+            "Area": 614.13
+        },
+        {
+            "Code": "0382",
+            "Municipality": "Östhammar",
+            "Area": 3486.4
+        }
+    ],
+    "Södermanland": [
+        {
+            "Code": "0484",
+            "Municipality": "Eskilstuna",
+            "Area": 1250.49
+        },
+        {
+            "Code": "0482",
+            "Municipality": "Flen",
+            "Area": 826.04
+        },
+        {
+            "Code": "0461",
+            "Municipality": "Gnesta",
+            "Area": 538.14
+        },
+        {
+            "Code": "0483",
+            "Municipality": "Katrineholm",
+            "Area": 1189.54
+        },
+        {
+            "Code": "0480",
+            "Municipality": "Nyköping",
+            "Area": 2066.41
+        },
+        {
+            "Code": "0481",
+            "Municipality": "Oxelösund",
+            "Area": 746.54
+        },
+        {
+            "Code": "0486",
+            "Municipality": "Strängnäs",
+            "Area": 975.08
+        },
+        {
+            "Code": "0488",
+            "Municipality": "Trosa",
+            "Area": 664.76
+        },
+        {
+            "Code": "0428",
+            "Municipality": "Vingåker",
+            "Area": 439.44
+        }
+    ],
+    "Östergötland": [
+        {
+            "Code": "0560",
+            "Municipality": "Boxholm",
+            "Area": 603.87
+        },
+        {
+            "Code": "0562",
+            "Municipality": "Finspång",
+            "Area": 1215.05
+        },
+        {
+            "Code": "0513",
+            "Municipality": "Kinda",
+            "Area": 1301.96
+        },
+        {
+            "Code": "0580",
+            "Municipality": "Linköping",
+            "Area": 1568.26
+        },
+        {
+            "Code": "0586",
+            "Municipality": "Mjölby",
+            "Area": 557.12
+        },
+        {
+            "Code": "0583",
+            "Municipality": "Motala",
+            "Area": 1267.23
+        },
+        {
+            "Code": "0581",
+            "Municipality": "Norrköping",
+            "Area": 2047.58
+        },
+        {
+            "Code": "0582",
+            "Municipality": "Söderköping",
+            "Area": 1325.18
+        },
+        {
+            "Code": "0584",
+            "Municipality": "Vadstena",
+            "Area": 413.33
+        },
+        {
+            "Code": "0563",
+            "Municipality": "Valdemarsvik",
+            "Area": 2049.56
+        },
+        {
+            "Code": "0512",
+            "Municipality": "Ydre",
+            "Area": 778.62
+        },
+        {
+            "Code": "0561",
+            "Municipality": "Åtvidaberg",
+            "Area": 780.27
+        },
+        {
+            "Code": "0509",
+            "Municipality": "Ödeshög",
+            "Area": 668.99
+        }
+    ],
+    "Jönköping": [
+        {
+            "Code": "0604",
+            "Municipality": "Aneby",
+            "Area": 553.89
+        },
+        {
+            "Code": "0686",
+            "Municipality": "Eksjö",
+            "Area": 873.29
+        },
+        {
+            "Code": "0662",
+            "Municipality": "Gislaved",
+            "Area": 1220.72
+        },
+        {
+            "Code": "0617",
+            "Municipality": "Gnosjö",
+            "Area": 450.05
+        },
+        {
+            "Code": "0643",
+            "Municipality": "Habo",
+            "Area": 462.24
+        },
+        {
+            "Code": "0680",
+            "Municipality": "Jönköping",
+            "Area": 1925.02
+        },
+        {
+            "Code": "0642",
+            "Municipality": "Mullsjö",
+            "Area": 211.03
+        },
+        {
+            "Code": "0682",
+            "Municipality": "Nässjö",
+            "Area": 988.49
+        },
+        {
+            "Code": "0684",
+            "Municipality": "Sävsjö",
+            "Area": 729.23
+        },
+        {
+            "Code": "0687",
+            "Municipality": "Tranås",
+            "Area": 437.74
+        },
+        {
+            "Code": "0665",
+            "Municipality": "Vaggeryd",
+            "Area": 858.15
+        },
+        {
+            "Code": "0685",
+            "Municipality": "Vetlanda",
+            "Area": 1600.43
+        },
+        {
+            "Code": "0683",
+            "Municipality": "Värnamo",
+            "Area": 1382.44
+        }
+    ],
+    "Kronoberg": [
+        {
+            "Code": "0764",
+            "Municipality": "Alvesta",
+            "Area": 1074.26
+        },
+        {
+            "Code": "0761",
+            "Municipality": "Lessebo",
+            "Area": 456.34
+        },
+        {
+            "Code": "0781",
+            "Municipality": "Ljungby",
+            "Area": 1995.13
+        },
+        {
+            "Code": "0767",
+            "Municipality": "Markaryd",
+            "Area": 532.83
+        },
+        {
+            "Code": "0763",
+            "Municipality": "Tingsryd",
+            "Area": 1207.24
+        },
+        {
+            "Code": "0760",
+            "Municipality": "Uppvidinge",
+            "Area": 1226.66
+        },
+        {
+            "Code": "0780",
+            "Municipality": "Växjö",
+            "Area": 1914.25
+        },
+        {
+            "Code": "0765",
+            "Municipality": "Älmhult",
+            "Area": 978.22
+        }
+    ],
+    "Kalmar": [
+        {
+            "Code": "0885",
+            "Municipality": "Borgholm",
+            "Area": 3654.83
+        },
+        {
+            "Code": "0862",
+            "Municipality": "Emmaboda",
+            "Area": 718.65
+        },
+        {
+            "Code": "0860",
+            "Municipality": "Hultsfred",
+            "Area": 1187.01
+        },
+        {
+            "Code": "0821",
+            "Municipality": "Högsby",
+            "Area": 799.42
+        },
+        {
+            "Code": "0880",
+            "Municipality": "Kalmar",
+            "Area": 1250.96
+        },
+        {
+            "Code": "0861",
+            "Municipality": "Mönsterås",
+            "Area": 941.04
+        },
+        {
+            "Code": "0840",
+            "Municipality": "Mörbylånga",
+            "Area": 3043.42
+        },
+        {
+            "Code": "0881",
+            "Municipality": "Nybro",
+            "Area": 1201.54
+        },
+        {
+            "Code": "0882",
+            "Municipality": "Oskarshamn",
+            "Area": 2282.72
+        },
+        {
+            "Code": "0834",
+            "Municipality": "Torsås",
+            "Area": 605.23
+        },
+        {
+            "Code": "0884",
+            "Municipality": "Vimmerby",
+            "Area": 1219.8
+        },
+        {
+            "Code": "0883",
+            "Municipality": "Västervik",
+            "Area": 3591.48
+        }
+    ],
+    "Gotland": [
+        {
+            "Code": "0980",
+            "Municipality": "Gotland",
+            "Area": 15241.07
+        }
+    ],
+    "Blekinge": [
+        {
+            "Code": "1082",
+            "Municipality": "Karlshamn",
+            "Area": 832.42
+        },
+        {
+            "Code": "1080",
+            "Municipality": "Karlskrona",
+            "Area": 3338.05
+        },
+        {
+            "Code": "1060",
+            "Municipality": "Olofström",
+            "Area": 413.43
+        },
+        {
+            "Code": "1081",
+            "Municipality": "Ronneby",
+            "Area": 1241.85
+        },
+        {
+            "Code": "1083",
+            "Municipality": "Sölvesborg",
+            "Area": 1106.4
+        }
+    ],
+    "Skåne": [
+        {
+            "Code": "1260",
+            "Municipality": "Bjuv",
+            "Area": 115.75
+        },
+        {
+            "Code": "1272",
+            "Municipality": "Bromölla",
+            "Area": 197.14
+        },
+        {
+            "Code": "1231",
+            "Municipality": "Burlöv",
+            "Area": 19.2
+        },
+        {
+            "Code": "1278",
+            "Municipality": "Båstad",
+            "Area": 881.9
+        },
+        {
+            "Code": "1285",
+            "Municipality": "Eslöv",
+            "Area": 424.68
+        },
+        {
+            "Code": "1283",
+            "Municipality": "Helsingborg",
+            "Area": 423.97
+        },
+        {
+            "Code": "1293",
+            "Municipality": "Hässleholm",
+            "Area": 1306.27
+        },
+        {
+            "Code": "1284",
+            "Municipality": "Höganäs",
+            "Area": 676.12
+        },
+        {
+            "Code": "1266",
+            "Municipality": "Hörby",
+            "Area": 433.05
+        },
+        {
+            "Code": "1267",
+            "Municipality": "Höör",
+            "Area": 320.0
+        },
+        {
+            "Code": "1276",
+            "Municipality": "Klippan",
+            "Area": 379.41
+        },
+        {
+            "Code": "1290",
+            "Municipality": "Kristianstad",
+            "Area": 1818.24
+        },
+        {
+            "Code": "1261",
+            "Municipality": "Kävlinge",
+            "Area": 292.45
+        },
+        {
+            "Code": "1282",
+            "Municipality": "Landskrona",
+            "Area": 300.64
+        },
+        {
+            "Code": "1262",
+            "Municipality": "Lomma",
+            "Area": 90.2
+        },
+        {
+            "Code": "1281",
+            "Municipality": "Lund",
+            "Area": 439.91
+        },
+        {
+            "Code": "1280",
+            "Municipality": "Malmö",
+            "Area": 332.64
+        },
+        {
+            "Code": "1273",
+            "Municipality": "Osby",
+            "Area": 599.84
+        },
+        {
+            "Code": "1275",
+            "Municipality": "Perstorp",
+            "Area": 161.92
+        },
+        {
+            "Code": "1291",
+            "Municipality": "Simrishamn",
+            "Area": 1261.15
+        },
+        {
+            "Code": "1265",
+            "Municipality": "Sjöbo",
+            "Area": 506.63
+        },
+        {
+            "Code": "1264",
+            "Municipality": "Skurup",
+            "Area": 510.96
+        },
+        {
+            "Code": "1230",
+            "Municipality": "Staffanstorp",
+            "Area": 107.28
+        },
+        {
+            "Code": "1214",
+            "Municipality": "Svalöv",
+            "Area": 388.62
+        },
+        {
+            "Code": "1263",
+            "Municipality": "Svedala",
+            "Area": 227.12
+        },
+        {
+            "Code": "1270",
+            "Municipality": "Tomelilla",
+            "Area": 397.39
+        },
+        {
+            "Code": "1287",
+            "Municipality": "Trelleborg",
+            "Area": 1175.03
+        },
+        {
+            "Code": "1233",
+            "Municipality": "Vellinge",
+            "Area": 705.46
+        },
+        {
+            "Code": "1286",
+            "Municipality": "Ystad",
+            "Area": 1189.32
+        },
+        {
+            "Code": "1292",
+            "Municipality": "Ängelholm",
+            "Area": 478.06
+        },
+        {
+            "Code": "1277",
+            "Municipality": "Åstorp",
+            "Area": 92.47
+        },
+        {
+            "Code": "1257",
+            "Municipality": "Örkelljunga",
+            "Area": 329.7
+        },
+        {
+            "Code": "1256",
+            "Municipality": "Östra Göinge",
+            "Area": 451.15
+        }
+    ],
+    "Halland": [
+        {
+            "Code": "1382",
+            "Municipality": "Falkenberg",
+            "Area": 1825.72
+        },
+        {
+            "Code": "1380",
+            "Municipality": "Halmstad",
+            "Area": 1699.89
+        },
+        {
+            "Code": "1315",
+            "Municipality": "Hylte",
+            "Area": 1046.59
+        },
+        {
+            "Code": "1384",
+            "Municipality": "Kungsbacka",
+            "Area": 1472.94
+        },
+        {
+            "Code": "1381",
+            "Municipality": "Laholm",
+            "Area": 963.38
+        },
+        {
+            "Code": "1383",
+            "Municipality": "Varberg",
+            "Area": 1703.35
+        }
+    ],
+    "Västra Götaland": [
+        {
+            "Code": "1440",
+            "Municipality": "Ale",
+            "Area": 331.55
+        },
+        {
+            "Code": "1489",
+            "Municipality": "Alingsås",
+            "Area": 551.17
+        },
+        {
+            "Code": "1460",
+            "Municipality": "Bengtsfors",
+            "Area": 1059.19
+        },
+        {
+            "Code": "1443",
+            "Municipality": "Bollebygd",
+            "Area": 282.39
+        },
+        {
+            "Code": "1490",
+            "Municipality": "Borås",
+            "Area": 967.54
+        },
+        {
+            "Code": "1438",
+            "Municipality": "Dals-Ed",
+            "Area": 825.43
+        },
+        {
+            "Code": "1445",
+            "Municipality": "Essunga",
+            "Area": 235.71
+        },
+        {
+            "Code": "1499",
+            "Municipality": "Falköping",
+            "Area": 1065.78
+        },
+        {
+            "Code": "1439",
+            "Municipality": "Färgelanda",
+            "Area": 618.33
+        },
+        {
+            "Code": "1480",
+            "Municipality": "Gothenburg",
+            "Area": 1025.37
+        },
+        {
+            "Code": "1444",
+            "Municipality": "Grästorp",
+            "Area": 280.66
+        },
+        {
+            "Code": "1447",
+            "Municipality": "Gullspång",
+            "Area": 554.95
+        },
+        {
+            "Code": "1471",
+            "Municipality": "Götene",
+            "Area": 620.74
+        },
+        {
+            "Code": "1466",
+            "Municipality": "Herrljunga",
+            "Area": 509.54
+        },
+        {
+            "Code": "1497",
+            "Municipality": "Hjo",
+            "Area": 584.47
+        },
+        {
+            "Code": "1401",
+            "Municipality": "Härryda",
+            "Area": 291.09
+        },
+        {
+            "Code": "1446",
+            "Municipality": "Karlsborg",
+            "Area": 797.35
+        },
+        {
+            "Code": "1482",
+            "Municipality": "Kungälv",
+            "Area": 682.43
+        },
+        {
+            "Code": "1441",
+            "Municipality": "Lerum",
+            "Area": 308.38
+        },
+        {
+            "Code": "1494",
+            "Municipality": "Lidköping",
+            "Area": 1372.61
+        },
+        {
+            "Code": "1462",
+            "Municipality": "Lilla Edet",
+            "Area": 342.37
+        },
+        {
+            "Code": "1484",
+            "Municipality": "Lysekil",
+            "Area": 695.41
+        },
+        {
+            "Code": "1493",
+            "Municipality": "Mariestad",
+            "Area": 1503.22
+        },
+        {
+            "Code": "1463",
+            "Municipality": "Mark",
+            "Area": 1013.2
+        },
+        {
+            "Code": "1461",
+            "Municipality": "Mellerud",
+            "Area": 944.46
+        },
+        {
+            "Code": "1430",
+            "Municipality": "Munkedal",
+            "Area": 675.01
+        },
+        {
+            "Code": "1481",
+            "Municipality": "Mölndal",
+            "Area": 152.28
+        },
+        {
+            "Code": "1421",
+            "Municipality": "Orust",
+            "Area": 882.99
+        },
+        {
+            "Code": "1402",
+            "Municipality": "Partille",
+            "Area": 58.98
+        },
+        {
+            "Code": "1495",
+            "Municipality": "Skara",
+            "Area": 448.69
+        },
+        {
+            "Code": "1496",
+            "Municipality": "Skövde",
+            "Area": 685.08
+        },
+        {
+            "Code": "1427",
+            "Municipality": "Sotenäs",
+            "Area": 684.37
+        },
+        {
+            "Code": "1415",
+            "Municipality": "Stenungsund",
+            "Area": 301.09
+        },
+        {
+            "Code": "1486",
+            "Municipality": "Strömstad",
+            "Area": 951.83
+        },
+        {
+            "Code": "1465",
+            "Municipality": "Svenljunga",
+            "Area": 987.15
+        },
+        {
+            "Code": "1435",
+            "Municipality": "Tanum",
+            "Area": 2351.35
+        },
+        {
+            "Code": "1472",
+            "Municipality": "Tibro",
+            "Area": 236.02
+        },
+        {
+            "Code": "1498",
+            "Municipality": "Tidaholm",
+            "Area": 522.95
+        },
+        {
+            "Code": "1419",
+            "Municipality": "Tjörn",
+            "Area": 845.94
+        },
+        {
+            "Code": "1452",
+            "Municipality": "Tranemo",
+            "Area": 778.48
+        },
+        {
+            "Code": "1488",
+            "Municipality": "Trollhättan",
+            "Area": 427.72
+        },
+        {
+            "Code": "1473",
+            "Municipality": "Töreboda",
+            "Area": 590.32
+        },
+        {
+            "Code": "1485",
+            "Municipality": "Uddevalla",
+            "Area": 733.03
+        },
+        {
+            "Code": "1491",
+            "Municipality": "Ulricehamn",
+            "Area": 1116.71
+        },
+        {
+            "Code": "1470",
+            "Municipality": "Vara",
+            "Area": 700.44
+        },
+        {
+            "Code": "1487",
+            "Municipality": "Vänersborg",
+            "Area": 898.83
+        },
+        {
+            "Code": "1442",
+            "Municipality": "Vårgårda",
+            "Area": 441.22
+        },
+        {
+            "Code": "1492",
+            "Municipality": "Åmål",
+            "Area": 889.71
+        },
+        {
+            "Code": "1407",
+            "Municipality": "Öckerö",
+            "Area": 511.4
+        }
+    ],
+    "Värmland": [
+        {
+            "Code": "1784",
+            "Municipality": "Arvika",
+            "Area": 1956.13
+        },
+        {
+            "Code": "1730",
+            "Municipality": "Eda",
+            "Area": 894.92
+        },
+        {
+            "Code": "1782",
+            "Municipality": "Filipstad",
+            "Area": 1711.71
+        },
+        {
+            "Code": "1763",
+            "Municipality": "Forshaga",
+            "Area": 397.29
+        },
+        {
+            "Code": "1764",
+            "Municipality": "Grums",
+            "Area": 478.82
+        },
+        {
+            "Code": "1783",
+            "Municipality": "Hagfors",
+            "Area": 2000.15
+        },
+        {
+            "Code": "1761",
+            "Municipality": "Hammarö",
+            "Area": 464.16
+        },
+        {
+            "Code": "1780",
+            "Municipality": "Karlstad",
+            "Area": 1517.74
+        },
+        {
+            "Code": "1715",
+            "Municipality": "Kil",
+            "Area": 406.87
+        },
+        {
+            "Code": "1781",
+            "Municipality": "Kristinehamn",
+            "Area": 1384.44
+        },
+        {
+            "Code": "1762",
+            "Municipality": "Munkfors",
+            "Area": 147.97
+        },
+        {
+            "Code": "1760",
+            "Municipality": "Storfors",
+            "Area": 472.71
+        },
+        {
+            "Code": "1766",
+            "Municipality": "Sunne",
+            "Area": 1448.25
+        },
+        {
+            "Code": "1785",
+            "Municipality": "Säffle",
+            "Area": 2497.51
+        },
+        {
+            "Code": "1737",
+            "Municipality": "Torsby",
+            "Area": 4357.44
+        },
+        {
+            "Code": "1765",
+            "Municipality": "Årjäng",
+            "Area": 1653.04
+        }
+    ],
+    "Örebro": [
+        {
+            "Code": "1882",
+            "Municipality": "Askersund",
+            "Area": 1019.74
+        },
+        {
+            "Code": "1862",
+            "Municipality": "Degerfors",
+            "Area": 433.68
+        },
+        {
+            "Code": "1861",
+            "Municipality": "Hallsberg",
+            "Area": 670.22
+        },
+        {
+            "Code": "1863",
+            "Municipality": "Hällefors",
+            "Area": 1151.25
+        },
+        {
+            "Code": "1883",
+            "Municipality": "Karlskoga",
+            "Area": 510.38
+        },
+        {
+            "Code": "1881",
+            "Municipality": "Kumla",
+            "Area": 205.8
+        },
+        {
+            "Code": "1860",
+            "Municipality": "Laxå",
+            "Area": 737.56
+        },
+        {
+            "Code": "1814",
+            "Municipality": "Lekeberg",
+            "Area": 481.63
+        },
+        {
+            "Code": "1885",
+            "Municipality": "Lindesberg",
+            "Area": 1480.5
+        },
+        {
+            "Code": "1864",
+            "Municipality": "Ljusnarsberg",
+            "Area": 631.08
+        },
+        {
+            "Code": "1884",
+            "Municipality": "Nora",
+            "Area": 690.82
+        },
+        {
+            "Code": "1880",
+            "Municipality": "Örebro",
+            "Area": 1620.6
+        }
+    ],
+    "Västmanland": [
+        {
+            "Code": "1984",
+            "Municipality": "Arboga",
+            "Area": 419.37
+        },
+        {
+            "Code": "1982",
+            "Municipality": "Fagersta",
+            "Area": 310.41
+        },
+        {
+            "Code": "1961",
+            "Municipality": "Hallstahammar",
+            "Area": 181.26
+        },
+        {
+            "Code": "1960",
+            "Municipality": "Kungsör",
+            "Area": 227.13
+        },
+        {
+            "Code": "1983",
+            "Municipality": "Köping",
+            "Area": 644.79
+        },
+        {
+            "Code": "1962",
+            "Municipality": "Norberg",
+            "Area": 447.67
+        },
+        {
+            "Code": "1981",
+            "Municipality": "Sala",
+            "Area": 1204.39
+        },
+        {
+            "Code": "1904",
+            "Municipality": "Skinnskatteberg",
+            "Area": 718.18
+        },
+        {
+            "Code": "1907",
+            "Municipality": "Surahammar",
+            "Area": 368.85
+        },
+        {
+            "Code": "1980",
+            "Municipality": "Västerås",
+            "Area": 1136.71
+        }
+    ],
+    "Dalarna": [
+        {
+            "Code": "2084",
+            "Municipality": "Avesta",
+            "Area": 669.08
+        },
+        {
+            "Code": "2081",
+            "Municipality": "Borlänge",
+            "Area": 635.81
+        },
+        {
+            "Code": "2080",
+            "Municipality": "Falun",
+            "Area": 2275.17
+        },
+        {
+            "Code": "2026",
+            "Municipality": "Gagnef",
+            "Area": 812.32
+        },
+        {
+            "Code": "2083",
+            "Municipality": "Hedemora",
+            "Area": 928.77
+        },
+        {
+            "Code": "2029",
+            "Municipality": "Leksand",
+            "Area": 1411.96
+        },
+        {
+            "Code": "2085",
+            "Municipality": "Ludvika",
+            "Area": 1647.81
+        },
+        {
+            "Code": "2023",
+            "Municipality": "Malung-Sälen",
+            "Area": 4312.49
+        },
+        {
+            "Code": "2062",
+            "Municipality": "Mora",
+            "Area": 3111.54
+        },
+        {
+            "Code": "2034",
+            "Municipality": "Orsa",
+            "Area": 1797.39
+        },
+        {
+            "Code": "2031",
+            "Municipality": "Rättvik",
+            "Area": 2137.79
+        },
+        {
+            "Code": "2061",
+            "Municipality": "Smedjebacken",
+            "Area": 1057.81
+        },
+        {
+            "Code": "2082",
+            "Municipality": "Säter",
+            "Area": 624.51
+        },
+        {
+            "Code": "2021",
+            "Municipality": "Vansbro",
+            "Area": 1657.35
+        },
+        {
+            "Code": "2039",
+            "Municipality": "Älvdalen",
+            "Area": 7142.83
+        }
+    ],
+    "Gävleborg": [
+        {
+            "Code": "2183",
+            "Municipality": "Bollnäs",
+            "Area": 1976.7
+        },
+        {
+            "Code": "2180",
+            "Municipality": "Gävle",
+            "Area": 3199.84
+        },
+        {
+            "Code": "2104",
+            "Municipality": "Hofors",
+            "Area": 445.71
+        },
+        {
+            "Code": "2184",
+            "Municipality": "Hudiksvall",
+            "Area": 4516.62
+        },
+        {
+            "Code": "2161",
+            "Municipality": "Ljusdal",
+            "Area": 5609.84
+        },
+        {
+            "Code": "2132",
+            "Municipality": "Nordanstig",
+            "Area": 2525.99
+        },
+        {
+            "Code": "2101",
+            "Municipality": "Ockelbo",
+            "Area": 1129.04
+        },
+        {
+            "Code": "2121",
+            "Municipality": "Ovanåker",
+            "Area": 2016.98
+        },
+        {
+            "Code": "2181",
+            "Municipality": "Sandviken",
+            "Area": 1297.07
+        },
+        {
+            "Code": "2182",
+            "Municipality": "Söderhamn",
+            "Area": 2281.32
+        }
+    ],
+    "Västernorrland": [
+        {
+            "Code": "2280",
+            "Municipality": "Härnösand",
+            "Area": 1938.58
+        },
+        {
+            "Code": "2282",
+            "Municipality": "Kramfors",
+            "Area": 2892.59
+        },
+        {
+            "Code": "2283",
+            "Municipality": "Sollefteå",
+            "Area": 5761.82
+        },
+        {
+            "Code": "2281",
+            "Municipality": "Sundsvall",
+            "Area": 4444.54
+        },
+        {
+            "Code": "2262",
+            "Municipality": "Timrå",
+            "Area": 1234.17
+        },
+        {
+            "Code": "2260",
+            "Municipality": "Ånge",
+            "Area": 3295.56
+        },
+        {
+            "Code": "2284",
+            "Municipality": "Örnsköldsvik",
+            "Area": 8428.78
+        }
+    ],
+    "Jämtland": [
+        {
+            "Code": "2326",
+            "Municipality": "Berg",
+            "Area": 6145.45
+        },
+        {
+            "Code": "2305",
+            "Municipality": "Bräcke",
+            "Area": 3783.7
+        },
+        {
+            "Code": "2361",
+            "Municipality": "Härjedalen",
+            "Area": 11859.62
+        },
+        {
+            "Code": "2309",
+            "Municipality": "Krokom",
+            "Area": 6812.75
+        },
+        {
+            "Code": "2303",
+            "Municipality": "Ragunda",
+            "Area": 2633.11
+        },
+        {
+            "Code": "2313",
+            "Municipality": "Strömsund",
+            "Area": 11780.57
+        },
+        {
+            "Code": "2321",
+            "Municipality": "Åre",
+            "Area": 8236.54
+        },
+        {
+            "Code": "2380",
+            "Municipality": "Östersund",
+            "Area": 2501.08
+        }
+    ],
+    "Västerbotten": [
+        {
+            "Code": "2403",
+            "Municipality": "Bjurholm",
+            "Area": 1363.77
+        },
+        {
+            "Code": "2425",
+            "Municipality": "Dorotea",
+            "Area": 2939.9
+        },
+        {
+            "Code": "2481",
+            "Municipality": "Lycksele",
+            "Area": 5888.93
+        },
+        {
+            "Code": "2418",
+            "Municipality": "Malå",
+            "Area": 1727.48
+        },
+        {
+            "Code": "2401",
+            "Municipality": "Nordmaling",
+            "Area": 2472.26
+        },
+        {
+            "Code": "2417",
+            "Municipality": "Norsjö",
+            "Area": 1923.58
+        },
+        {
+            "Code": "2409",
+            "Municipality": "Robertsfors",
+            "Area": 2369.65
+        },
+        {
+            "Code": "2482",
+            "Municipality": "Skellefteå",
+            "Area": 9955.58
+        },
+        {
+            "Code": "2422",
+            "Municipality": "Sorsele",
+            "Area": 7957.64
+        },
+        {
+            "Code": "2421",
+            "Municipality": "Storuman",
+            "Area": 8234.1
+        },
+        {
+            "Code": "2480",
+            "Municipality": "Umeå",
+            "Area": 5214.16
+        },
+        {
+            "Code": "2462",
+            "Municipality": "Vilhelmina",
+            "Area": 8740.5
+        },
+        {
+            "Code": "2404",
+            "Municipality": "Vindeln",
+            "Area": 2846.11
+        },
+        {
+            "Code": "2460",
+            "Municipality": "Vännäs",
+            "Area": 553.7
+        },
+        {
+            "Code": "2463",
+            "Municipality": "Åsele",
+            "Area": 4543.95
+        }
+    ],
+    "Norrbotten": [
+        {
+            "Code": "2506",
+            "Municipality": "Arjeplog",
+            "Area": 14494.09
+        },
+        {
+            "Code": "2505",
+            "Municipality": "Arvidsjaur",
+            "Area": 6126.32
+        },
+        {
+            "Code": "2582",
+            "Municipality": "Boden",
+            "Area": 4285.13
+        },
+        {
+            "Code": "2523",
+            "Municipality": "Gällivare",
+            "Area": 16818.22
+        },
+        {
+            "Code": "2583",
+            "Municipality": "Haparanda",
+            "Area": 1868.27
+        },
+        {
+            "Code": "2510",
+            "Municipality": "Jokkmokk",
+            "Area": 19334.44
+        },
+        {
+            "Code": "2514",
+            "Municipality": "Kalix",
+            "Area": 3712.06
+        },
+        {
+            "Code": "2584",
+            "Municipality": "Kiruna",
+            "Area": 20551.42
+        },
+        {
+            "Code": "2580",
+            "Municipality": "Luleå",
+            "Area": 4953.75
+        },
+        {
+            "Code": "2521",
+            "Municipality": "Pajala",
+            "Area": 8050.73
+        },
+        {
+            "Code": "2581",
+            "Municipality": "Piteå",
+            "Area": 4680.52
+        },
+        {
+            "Code": "2560",
+            "Municipality": "Älvsbyn",
+            "Area": 1795.24
+        },
+        {
+            "Code": "2513",
+            "Municipality": "Överkalix",
+            "Area": 2919.47
+        },
+        {
+            "Code": "2518",
+            "Municipality": "Övertorneå",
+            "Area": 2492.29
+        }
+    ]
+}
