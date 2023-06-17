@@ -14,7 +14,7 @@ export const COLORS = ['#10B981', '#3B82F6', '#6B7280', '#D1D5DB'];
 export const colors = {
     background: 'rgba(0, 0, 0, 0.86)',
     white: 'rgba(255, 255, 255, 0.1)',
-    gray: '#efefef',
+    gray: '#656565',
     pink: 'pink',
     blue: 'lightskyblue'
 }

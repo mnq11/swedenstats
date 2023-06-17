@@ -40,17 +40,40 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
 
 
     const yearPopulationData = chartData.reduce<{
-        [key: string]: { name: string, value: number, Male: number, Female: number }
+        [key: string]: { name: string, value: number, Male: number, Female: number, GrowthRate: number, MaleGrowthRate: number, FemaleGrowthRate: number }
     }>((accumulator, current) => {
         if (accumulator[current.Year]) {
             accumulator[current.Year].value += current.Population;
             accumulator[current.Year][current.Gender === '1' ? 'Male' : 'Female'] += current.Population;
         } else {
-            accumulator[current.Year] = {name: current.Year, value: current.Population, Male: 0, Female: 0};
-            accumulator[current.Year][current.Gender === '1' ? 'Male' : 'Female'] += current.Population;
+            accumulator[current.Year] = {
+                name: current.Year,
+                value: current.Population,
+                Male: current.Gender === '1' ? current.Population : 0,
+                Female: current.Gender === '2' ? current.Population : 0,
+                GrowthRate: 0,
+                MaleGrowthRate: 0,
+                FemaleGrowthRate: 0
+            };
         }
         return accumulator;
     }, {});
+
+    const yearPopulationDataSorted = Object.values(yearPopulationData).sort((a, b) => parseInt(a.name) - parseInt(b.name));
+
+    for (let i = 0; i < yearPopulationDataSorted.length; i++) {
+        if (i > 0) {
+            yearPopulationDataSorted[i].GrowthRate = ((yearPopulationDataSorted[i].value - yearPopulationDataSorted[i - 1].value) / yearPopulationDataSorted[i - 1].value) * 100;
+            yearPopulationDataSorted[i].MaleGrowthRate = ((yearPopulationDataSorted[i].Male - yearPopulationDataSorted[i - 1].Male) / yearPopulationDataSorted[i - 1].Male) * 100;
+            yearPopulationDataSorted[i].FemaleGrowthRate = ((yearPopulationDataSorted[i].Female - yearPopulationDataSorted[i - 1].Female) / yearPopulationDataSorted[i - 1].Female) * 100;
+        } else {
+            yearPopulationDataSorted[i].GrowthRate = 0;
+            yearPopulationDataSorted[i].MaleGrowthRate = 0;
+            yearPopulationDataSorted[i].FemaleGrowthRate = 0;
+        }
+    }
+
+
 
 
     const maritalStatusPopulationData = chartData.reduce<{
@@ -156,11 +179,12 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         return accumulator;
     }, {});
 
-    const yearPopulationChartData = Object.values(yearPopulationData).map(obj => ({
+    const yearPopulationChartData = yearPopulationDataSorted.map(obj => ({
         ...obj,
-        name: parseInt(obj.name)
-    })).sort((a, b) => a.name - b.name);
-    Object.values(maritalStatusPopulationData);
+        name: parseInt(obj.name),
+        GrowthRate: obj.GrowthRate
+    }));
+
     const agePopulationChartData = Object.values(agePopulationData).map(obj => ({
         ...obj,
         name: parseInt(obj.name)

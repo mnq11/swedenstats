@@ -1,6 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMale, faFemale, faChartPie } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMale, faFemale, faChartPie} from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
 
 // Constants
@@ -49,42 +49,55 @@ const FlexContainer = styled.div`
   justify-content: space-between;
 `;
 
-// Custom Tooltip Component
-export const CustomTooltipYear = ({ active, payload = [] }: {active: boolean, payload: any[]}) => {
+export const CustomTooltipYear = ({active, payload = []}: { active: boolean, payload: any[] }) => {
     if (active && payload[0]) {
-        const { name, Male, Female } = payload[0].payload;
+        const {name, Male, Female, GrowthRate, MaleGrowthRate, FemaleGrowthRate} = payload[0].payload;
 
         return (
             <TooltipContainer>
                 <TooltipInnerContainer>
                     <LabelStyles>
                         <IconStyles>
-                            <FontAwesomeIcon icon={faChartPie} />
+                            <FontAwesomeIcon icon={faChartPie}/>
                         </IconStyles>
                         {` Year : ${name}`}
                     </LabelStyles>
 
                     <DescStyles>{`Total : ${payload[0].value}`}</DescStyles>
+                    <DescStyles>{`Total Growth Rate: ${(GrowthRate || 0).toFixed(3)}%`}</DescStyles>
 
                     <FlexContainer>
                         <TooltipInnerContainer>
                             <DescStyles>
                                 <IconStyles>
-                                    <FontAwesomeIcon style={{color: LIGHT_SKY_BLUE}} icon={faMale} />
+                                    <FontAwesomeIcon style={{color: LIGHT_SKY_BLUE}} icon={faMale}/>
                                 </IconStyles>
                                 {`Male : ${Male}`}
+                            </DescStyles>
+                            <DescStyles>
+                                <IconStyles>
+                                    <FontAwesomeIcon style={{color: LIGHT_SKY_BLUE}} icon={faMale}/>
+                                </IconStyles>
+                                {`Male Growth Rate: ${(MaleGrowthRate || 0).toFixed(3)}%`}
                             </DescStyles>
                         </TooltipInnerContainer>
 
                         <TooltipInnerContainer>
                             <DescStyles>
                                 <IconStyles>
-                                    <FontAwesomeIcon style={{color: PINK}} icon={faFemale} />
+                                    <FontAwesomeIcon style={{color: PINK}} icon={faFemale}/>
                                 </IconStyles>
                                 {`Female : ${Female}`}
                             </DescStyles>
+                            <DescStyles>
+                                <IconStyles>
+                                    <FontAwesomeIcon style={{color: PINK}} icon={faFemale}/>
+                                </IconStyles>
+                                {`Female Growth Rate: ${(FemaleGrowthRate || 0).toFixed(3)}%`}
+                            </DescStyles>
                         </TooltipInnerContainer>
                     </FlexContainer>
+
                 </TooltipInnerContainer>
             </TooltipContainer>
         );
