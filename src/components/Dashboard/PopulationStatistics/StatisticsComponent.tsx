@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Props } from "./types/types";
-import { CustomTooltipAgeGender } from "./tools/CustomTooltipAgeGender";
-import { CustomTooltipYear } from "./tools/CustomTooltipYear";
-import {CustomTooltipMaritalStatus} from "./tools/CustomTooltipMaritalStatus";
-import {PopulationBarChart} from "./Charts/PopulationBarChart";
-import {PopulationPieChart} from "./Charts/PopulationPieChart";
+import { CustomTooltipAgeGender } from "./Charts/PopulationBarChart/CustomTooltipAgeGender";
+import { CustomTooltipYear } from "./Charts/PopulationLineChart/CustomTooltipYear";
+import {CustomTooltipMaritalStatus} from "./Charts/PopulationPieChart/CustomTooltipMaritalStatus";
+import {PopulationBarChart} from "./Charts/PopulationBarChart/PopulationBarChart";
+import {PopulationLineChart} from "./Charts/PopulationLineChart/PopulationLineChart";
+import {PopulationPieChart} from "./Charts/PopulationPieChart/PopulationPieChart";
 import {Parts} from "./Charts/yearSeelctor";
 import styled from "styled-components";
 
@@ -13,7 +14,7 @@ const StatisticsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  padding: 1px;
   gap: 5px; // provide space between child components
 `;
 
@@ -170,7 +171,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
                 chartData={agePopulationChartData}
                 CustomTooltip={CustomTooltipAgeGender}
             />
-            <PopulationBarChart
+            <PopulationLineChart
                 chartTitle="Population by Year"
                 chartData={yearPopulationChartData}
                 CustomTooltip={CustomTooltipYear}

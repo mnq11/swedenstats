@@ -1,8 +1,8 @@
 import React from "react";
 import {Bar, BarChart, CartesianGrid, Cell, Legend, Tooltip, XAxis, YAxis, ResponsiveContainer} from "recharts";
 import styled from 'styled-components';
-import {PopulationBarChartProps} from "../types/types";
-import {COLORS} from "../../../../styles/styles";
+import {PopulationBarChartProps} from "../../types/types";
+import {COLORS} from "../../../../../styles/styles";
 
 const ChartContainer = styled.div`
   background: #282c34;

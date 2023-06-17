@@ -11,14 +11,6 @@ export interface StatsData {
 export interface Props {
     statsData: StatsData;
 }
-
-
-export type MaritalStatusSelectorProps = {
-    selectedMaritalStatus: string,
-    setSelectedMaritalStatus: (status: string) => void,
-    maritalStatusPopulationChartData: any[] // replace 'any' with your actual data type
-};
-
 export type PopulationBarChartProps = {
     chartTitle: string,
     chartData: any[], // replace 'any' with your actual data type

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import PopulationStatistics from "./PopulationStatistics/PopulationStatistics";
 
-export const countiesData = require('./CountiesData.json') as CountiesData;
+export const countiesData = require('../../Model/CountiesData.json') as CountiesData;
 export interface MunicipalityData {
     Code: string;
     Municipality: string;
