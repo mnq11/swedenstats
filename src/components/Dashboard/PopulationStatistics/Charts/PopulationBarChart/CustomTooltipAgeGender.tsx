@@ -70,9 +70,15 @@ interface MaritalStatus {
     Divorced: number;
 }
 
-interface PayloadType {
+interface PayloadNestedType {
     Male: MaritalStatus;
     Female: MaritalStatus;
+    name: string;
+    value: number;
+}
+
+interface PayloadType {
+    payload: PayloadNestedType;
     name: string;
     value: number;
 }
@@ -87,49 +93,61 @@ interface GenderInfoProps {
     genderName: string;
 }
 
-const GenderInfo: React.FC<GenderInfoProps> = ({gender, genderName}) => {
-    const iconColor = genderName === 'Male' ? 'lightskyblue' : 'pink';
-    const icon = genderName === 'Male' ? faMale : faFemale;
-
-    return (
-        <TooltipInnerContainer>
-            <DescStyles>
-                <IconStyles>
-                    <FontAwesomeIcon icon={icon} style={{color: iconColor}}/>
-                </IconStyles>
-                {`${genderName} : ${gender.Single + gender.Married + gender.Widowed + gender.Divorced}`}
-            </DescStyles>
-            {Object.entries(gender).map(([status, count]) => (
-                <DescStyles key={status}>
-                    <IconStyles>
-                        <FontAwesomeIcon icon={statusToIcon(status)} style={{color: iconColor}}/>
-                    </IconStyles>
-                    {`${status} : ${count}`}
-                </DescStyles>
-            ))}
-        </TooltipInnerContainer>
-    );
+interface GenderInfoProps {
+    gender: MaritalStatus;
+    genderName: string;
+    total: number;
 }
 
+// Helper function to map status to corresponding icon
 const statusToIcon = (status: string) => {
     switch (status) {
-        case 'Single':
+        case "Single":
             return faRibbon;
-        case 'Married':
+        case "Married":
             return faRing;
-        case 'Widowed':
+        case "Widowed":
             return faWindowClose;
-        case 'Divorced':
+        case "Divorced":
             return faHeartBroken;
         default:
             return faChartPie;
     }
 };
 
+const GenderInfo: React.FC<GenderInfoProps> = ({ gender, genderName, total }) => {
+    const iconColor = genderName === "Male" ? "lightskyblue" : "pink";
+    const icon = genderName === "Male" ? faMale : faFemale;
+
+    const totalCount = Object.values(gender).reduce((a, b) => a + b, 0);
+
+    return (
+        <TooltipInnerContainer>
+            <DescStyles>
+                <IconStyles>
+                    <FontAwesomeIcon icon={icon} style={{ color: iconColor }} />
+                </IconStyles>
+                {`${genderName} : ${totalCount} (${((totalCount / total) * 100).toFixed(2)}%)`}
+            </DescStyles>
+            {Object.entries(gender).map(([status, count]) => (
+                <DescStyles key={status}>
+                    <IconStyles>
+                        <FontAwesomeIcon icon={statusToIcon(status)} style={{ color: iconColor }} />
+                    </IconStyles>
+                    {`${status} : ${count} (${((count / totalCount) * 100).toFixed(2)}%)`}
+                </DescStyles>
+            ))}
+        </TooltipInnerContainer>
+    );
+};
+
 export const CustomTooltipAgeGender: React.FC<TooltipProps> = ({active, payload}) => {
     if (active && payload && payload.length) {
-        const malePayload = payload[0].Male ?? {Single: 0, Married: 0, Widowed: 0, Divorced: 0};
-        const femalePayload = payload[0].Female ?? {Single: 0, Married: 0, Widowed: 0, Divorced: 0};
+        const malePayload = payload[0].payload.Male ?? {Single: 0, Married: 0, Widowed: 0, Divorced: 0};
+        const femalePayload = payload[0].payload.Female ?? {Single: 0, Married: 0, Widowed: 0, Divorced: 0};
+        // Calculate total count for both genders
+        const total = Object.values(malePayload).reduce((a, b) => a + b, 0) +
+            Object.values(femalePayload).reduce((a, b) => a + b, 0);
 
         return (
             <TooltipContainer>
@@ -138,12 +156,12 @@ export const CustomTooltipAgeGender: React.FC<TooltipProps> = ({active, payload}
                         <IconStyles>
                             <FontAwesomeIcon icon={faChartPie}/>
                         </IconStyles>
-                        {`Age : ${payload[0].name}`}
+                        {`Age : ${payload[0].payload.name}`}
                     </LabelStyles>
-                    <DescStyles>{`Total : ${payload[0].value}`}</DescStyles>
+                    <DescStyles>{`Total : ${total}`}</DescStyles>
                     <TooltipSections>
-                        <GenderInfo gender={malePayload} genderName="Male"/>
-                        <GenderInfo gender={femalePayload} genderName="Female"/>
+                        <GenderInfo gender={malePayload} genderName="Male" total={total}/>
+                        <GenderInfo gender={femalePayload} genderName="Female" total={total}/>
                     </TooltipSections>
                 </TooltipInnerContainer>
             </TooltipContainer>

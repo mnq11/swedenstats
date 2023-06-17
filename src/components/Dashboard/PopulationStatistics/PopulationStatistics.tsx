@@ -21,13 +21,13 @@ interface PopulationStatisticsProps {
 }
 const PopulationStatisticsContainer = styled.div`
   width: 100%;
-  height: 100%; // added to take full height
-  padding: 0; // changed from 2rem
+  height: 100%; 
+  padding: 0; 
   background-color: #282c34;
   box-sizing: border-box;
   border-radius: 20px;
   transition: all 0.3s ease;
-  margin: 0; // added to remove margins
+  margin: 0; 
 `;
 
 const PopulationStatisticsHeader = styled.header`
@@ -40,7 +40,7 @@ const PopulationStatisticsHeader = styled.header`
 
 const Title = styled.h1`
   font-size: 2.5rem; // Bigger font-size
-  color: ${props => props.color || '#fff'}; // White color for title
+  color: ${props => props.color || '#fff'};
   margin: 1rem;
 
   @media (max-width: 600px) {
@@ -53,22 +53,21 @@ const Label = styled.label`
   display: block;
   font-size: 1rem;
   margin: 1rem;
-  color: #fff; // White color for label
+  color: #fff; 
 
   @media (max-width: 600px) {
     margin: 0.5rem;
   }
 `;
 
-//...
 
 const Select = styled.select`
   display: block;
   width: 100%;
-  padding: 1rem; // Increased padding for bigger select
+  padding: 1rem; 
   margin: 1rem;
-  font-size: 1.5rem; // Increase font-size for bigger text
-  text-align: center; // Center the text
+  font-size: 1.5rem; 
+  text-align: center; 
   border-radius: 20px;
   border: 1px solid #ccc;
   appearance: none;
@@ -89,8 +88,8 @@ const Select = styled.select`
 
   @media (max-width: 600px) {
     margin: 0.5rem;
-    padding: 0.75rem; // Decrease padding for smaller screens
-    font-size: 1.25rem; // Decrease font-size for smaller screens
+    padding: 0.75rem; 
+    font-size: 1.25rem; 
   }
 `;
 

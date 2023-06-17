@@ -1,3 +1,5 @@
+// StatisticsComponent
+
 import React, { useState } from 'react';
 import { Props } from "./types/types";
 import { CustomTooltipAgeGender } from "./Charts/PopulationBarChart/CustomTooltipAgeGender";
@@ -8,6 +10,8 @@ import {PopulationLineChart} from "./Charts/PopulationLineChart/PopulationLineCh
 import {PopulationPieChart} from "./Charts/PopulationPieChart/PopulationPieChart";
 import {Parts} from "./Charts/yearSeelctor";
 import styled from "styled-components";
+
+
 
 const StatisticsWrapper = styled.div`
   display: flex;
@@ -27,9 +31,9 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         Region: item.key[0],
         MaritalStatus: item.key[1],
         Age: item.key[2],
-        Gender: item.key[3],
+        Gender: item.key[3] || '1', // providing default value as Male
         Year: item.key[4],
-        Population: parseInt(item.values[0]),
+        Population: parseInt(item.values[0]) || 0,
     }));
 
     const filteredData = chartData.filter(d => (d.Year === selectedYear) && (selectedMaritalStatus === 'All' || d.MaritalStatus === selectedMaritalStatus));
@@ -117,7 +121,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         if (!accumulator[current.Age]) {
             accumulator[current.Age] = {
                 name: current.Age,
-                value: current.Population,
+                value: current.Population || 0, // providing default value as 0
                 Male: {Single: 0, Married: 0, Widowed: 0, Divorced: 0},
                 Female: {Single: 0, Married: 0, Widowed: 0, Divorced: 0},
             };
@@ -125,17 +129,18 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
 
         const maritalStatus = current.MaritalStatus === 'G' ? 'Married' : (current.MaritalStatus === 'ÄNKL' ? 'Widowed' : (current.MaritalStatus === 'OG' ? 'Single' : 'Divorced'));
 
+        const population = current.Population || 0; // providing default value as 0
+
         if (current.Gender === '1') {
-            accumulator[current.Age].Male[maritalStatus] += current.Population;
+            accumulator[current.Age].Male[maritalStatus] += population;
         } else {
-            accumulator[current.Age].Female[maritalStatus] += current.Population;
+            accumulator[current.Age].Female[maritalStatus] += population;
         }
 
-        accumulator[current.Age].value += current.Population;
+        accumulator[current.Age].value += population;
 
         return accumulator;
     }, {});
-
 
     const genderPopulationData = filteredData.reduce<{
         [key: string]: { name: string, value: number }
