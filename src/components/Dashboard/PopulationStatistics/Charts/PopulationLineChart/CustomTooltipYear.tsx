@@ -25,14 +25,14 @@ const TooltipInnerContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const LabelStyles = styled.p`
+const LabelStyles = styled.div`
   color: ${LIGHT_GRAY};
   font-weight: bold;
   margin-bottom: 0;
   font-size: 1.5em;
 `;
 
-const DescStyles = styled.p`
+const DescStyles = styled.div`
   color: ${WHITE};
   margin-bottom: 0;
   font-size: 1.2em;

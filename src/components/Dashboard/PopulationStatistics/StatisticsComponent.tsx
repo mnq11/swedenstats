@@ -1,31 +1,62 @@
 // StatisticsComponent
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Props } from "./types/types";
-import { CustomTooltipAgeGender } from "./Charts/PopulationBarChart/CustomTooltipAgeGender";
+import { CustomAgeGenderTooltip } from "./Charts/PopulationBarChart/CustomTooltipAgeGender";
 import { CustomTooltipYear } from "./Charts/PopulationLineChart/CustomTooltipYear";
 import {CustomTooltipMaritalStatus} from "./Charts/PopulationPieChart/CustomTooltipMaritalStatus";
 import {PopulationBarChart} from "./Charts/PopulationBarChart/PopulationBarChart";
 import {PopulationLineChart} from "./Charts/PopulationLineChart/PopulationLineChart";
 import {PopulationPieChart} from "./Charts/PopulationPieChart/PopulationPieChart";
-import {Parts} from "./Charts/yearSeelctor";
 import styled from "styled-components";
-
-
 
 const StatisticsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1px;
-  gap: 5px; // provide space between child components
+  padding: 2em;
+  gap: 1em;
+  width: 90%;
+  max-width: 800px;
+  margin: 2em auto;
+  box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  @media (max-width: 1200px) {
+    max-width: 90%;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 90%;
+    padding: 1.5em;
+    margin: 1em auto;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 85%;
+    padding: 1em;
+    margin: 0.75em auto;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 80%;
+    padding: 0.75em;
+    margin: 0.5em auto;
+  }
+
+  @media (max-width: 320px) {
+    max-width: 75%;
+    padding: 0.5em;
+    margin: 0.5em auto;
+  }
 `;
 
-const StatisticsComponent: React.FC<Props> = ({statsData}) => {
-    const [selectedYear, setSelectedYear] = useState('2022');
-    const selectedMaritalStatus = 'All';
 
+interface StatisticsProps extends Props {
+    selectedYear: string;
+}
+
+const StatisticsComponent: React.FC<StatisticsProps> = ({statsData, selectedYear}) => {
+    const selectedMaritalStatus = 'All';
     const chartData = statsData.data.map((item, index) => ({
         name: `Data ${index + 1}`,
         Region: item.key[0],
@@ -35,10 +66,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         Year: item.key[4],
         Population: parseInt(item.values[0]) || 0,
     }));
-
     const filteredData = chartData.filter(d => (d.Year === selectedYear) && (selectedMaritalStatus === 'All' || d.MaritalStatus === selectedMaritalStatus));
-
-
     const yearPopulationData = chartData.reduce<{
         [key: string]: { name: string, value: number, Male: number, Female: number, GrowthRate: number, MaleGrowthRate: number, FemaleGrowthRate: number }
     }>((accumulator, current) => {
@@ -58,9 +86,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         }
         return accumulator;
     }, {});
-
     const yearPopulationDataSorted = Object.values(yearPopulationData).sort((a, b) => parseInt(a.name) - parseInt(b.name));
-
     for (let i = 0; i < yearPopulationDataSorted.length; i++) {
         if (i > 0) {
             yearPopulationDataSorted[i].GrowthRate = ((yearPopulationDataSorted[i].value - yearPopulationDataSorted[i - 1].value) / yearPopulationDataSorted[i - 1].value) * 100;
@@ -72,10 +98,6 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
             yearPopulationDataSorted[i].FemaleGrowthRate = 0;
         }
     }
-
-
-
-
     const maritalStatusPopulationData = chartData.reduce<{
         [key: string]: { name: string, value: number, maleAgeGroups: { [key: string]: number }, femaleAgeGroups: { [key: string]: number }, maleCount: number, femaleCount: number }
     }>((accumulator, current) => {
@@ -85,10 +107,8 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
             'ÄNKL': 'Widowed',
             'SK': 'Divorced'
         };
-
         const maritalStatus = maritalStatusMap[current.MaritalStatus];
         const currentAge = parseInt(current.Age);
-
         if (current.Year === selectedYear && currentAge >= 18) {
             let ageGroup;
             if (currentAge < 20) {
@@ -97,7 +117,6 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
                 // Calculate the age group by 10 year intervals starting from 20
                 ageGroup = `${Math.floor(currentAge / 10) * 10} - ${Math.floor(currentAge / 10) * 10 + 9}`;
             }
-
             if (accumulator[maritalStatus]) {
                 accumulator[maritalStatus].value += current.Population;
 
@@ -125,13 +144,8 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
                 }
             }
         }
-
         return accumulator;
     }, {});
-
-
-
-
     const agePopulationData = filteredData.reduce<{
         [key: string]: {
             name: string,
@@ -149,9 +163,7 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
                 Female: {Single: 0, Married: 0, Widowed: 0, Divorced: 0},
             };
         }
-
         const maritalStatus = current.MaritalStatus === 'G' ? 'Married' : (current.MaritalStatus === 'ÄNKL' ? 'Widowed' : (current.MaritalStatus === 'OG' ? 'Single' : 'Divorced'));
-
         const population = current.Population || 0; // providing default value as 0
 
         if (current.Gender === '1') {
@@ -159,18 +171,14 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         } else {
             accumulator[current.Age].Female[maritalStatus] += population;
         }
-
         accumulator[current.Age].value += population;
-
         return accumulator;
     }, {});
-
     const genderPopulationData = filteredData.reduce<{
         [key: string]: { name: string, value: number }
     }>((accumulator, current) => {
         // Map '1' to 'Male' and '2' to 'Female'
         const gender = current.Gender === '1' ? 'Male' : 'Female';
-
         if (accumulator[gender]) {
             accumulator[gender].value += current.Population;
         } else {
@@ -178,39 +186,35 @@ const StatisticsComponent: React.FC<Props> = ({statsData}) => {
         }
         return accumulator;
     }, {});
-
     const yearPopulationChartData = yearPopulationDataSorted.map(obj => ({
         ...obj,
         name: parseInt(obj.name),
         GrowthRate: obj.GrowthRate
     }));
-
     const agePopulationChartData = Object.values(agePopulationData).map(obj => ({
         ...obj,
         name: parseInt(obj.name)
     })).sort((a, b) => a.name - b.name);
     Object.values(genderPopulationData);
-    const YEARS = Array.from({length: 2022 - 1968 + 1}, (_, i) => String(2022 - i));
+    // const YEARS = Array.from({length: 2022 - 1968 + 1}, (_, i) => String(2022 - i));
 
     return (
-        <StatisticsWrapper>
-            <Parts selectedYear={selectedYear} setSelectedYear={setSelectedYear} YEARS={YEARS} />
+        <><StatisticsWrapper>
+
             <PopulationBarChart
                 chartTitle={`Population by Age in ${selectedYear}`}
                 chartData={agePopulationChartData}
-                CustomTooltip={CustomTooltipAgeGender}
-            />
+                CustomTooltip={CustomAgeGenderTooltip}/>
+        </StatisticsWrapper><StatisticsWrapper>
             <PopulationLineChart
                 chartTitle="Population by Year"
                 chartData={yearPopulationChartData}
-                CustomTooltip={CustomTooltipYear}
-            />
+                CustomTooltip={CustomTooltipYear}/> </StatisticsWrapper><StatisticsWrapper>
             <PopulationPieChart
                 chartTitle={`Population by Marital Status in ${selectedYear}`}
                 chartData={Object.values(maritalStatusPopulationData)}
-                CustomTooltip={CustomTooltipMaritalStatus}
-            />
-        </StatisticsWrapper>
+                CustomTooltip={CustomTooltipMaritalStatus}/>
+        </StatisticsWrapper></>
     );
 }
 

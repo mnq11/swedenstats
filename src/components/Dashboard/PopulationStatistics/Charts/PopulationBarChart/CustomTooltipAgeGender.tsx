@@ -1,88 +1,67 @@
 import React from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-    faMale,
-    faFemale,
-    faRing,
-    faHeartBroken,
-    faWindowClose,
-    faRibbon,
-    faChartPie
-} from '@fortawesome/free-solid-svg-icons';
+import {faChartPie} from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
-import {colors} from "../../../../../styles/styles";
+import {darkMode} from "../../../../../styles/styles";
+import GenderDetails from "./GenderDetails";
 
-const TooltipContainer = styled.div`
+const TooltipWrapper  = styled.div`
   background: rgba(0, 0, 0, 0.86);
-  border-radius: 10px; // Increased border radius
-  background: ${colors.background};
+  border-radius: 10px;
+  background: ${darkMode.backgroundColor};
   border-radius: 10px;
   padding: 15px;
   font-size: 1em;
   line-height: 1.4em;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${darkMode.textColor};
   margin-bottom: 10px;
   transition: all 0.3s ease;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  
+  @media (max-width: 600px) {
+  padding: 10px;
+    }
+
   @media (max-width: 768px) {
     padding: 10px;
   }
-
   @media (min-width: 769px) and (max-width: 1024px) {
     padding: 12px;
   }
-
   @media (min-width: 1025px) {
     padding: 15px;
   }
 `;
 
-const TooltipInnerContainer = styled.div`
-  padding: 10px; // Increased padding
+const TooltipContent   = styled.div`
+  padding: 10px;
 `;
 const TooltipSections = styled.div`
   display: flex;
-  justify-content: space-around; // Horizontally center the items and add equal space around them
-  flex-wrap: wrap; // Sections will wrap to the next line on smaller screens
-  gap: 10px; // Gap between sections for better readability
-`;
-const GenderInfoStyles = styled.div`
-  flex: 1;
-  min-width: 200px; // or any minimum width that suits your design
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
-const TotalStyles = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1); // Slightly lighter background
-  border-radius: 5px; // Rounded edges
-  font-size: 1.2em;
-  width: 100%; // Takes the full width of the parent container
-`;
-
-
-const LabelStyles = styled.p`
+const LabelStyles = styled.div`
   color: #efefef;
   font-weight: bold;
-  margin-bottom: 5px; // Reduced margin
+  margin-bottom: 5px;
   font-size: 1.5em;
-  border-bottom: 1px solid #efefef; // Added a line for better separation
+  border-bottom: 1px solid #efefef;
 `;
 
-const DescStyles = styled.p`
+const DescStyles = styled.div`
   color: #ffffff;
   margin-bottom: 0;
   font-size: 1.2em;
-  margin-top: 5px; // Added top margin for better spacing
+  margin-top: 5px;
 `;
 
-const IconStyles = styled.div`
-  margin-right: 8px; // Increased margin for better spacing
+const IconStyles = styled.span`
+  margin-right: 8px;
   display: inline-block;
-  vertical-align: middle; // Icon will be vertically centered with the text
+  vertical-align: middle;
 `;
 
 interface MaritalStatus {
@@ -92,76 +71,25 @@ interface MaritalStatus {
     Divorced: number;
 }
 
-interface PayloadNestedType {
+interface DemographicPayload {
     Male: MaritalStatus;
     Female: MaritalStatus;
     name: string;
     value: number;
 }
 
-interface PayloadType {
-    payload: PayloadNestedType;
+interface TooltipPayload {
+    payload: DemographicPayload;
     name: string;
     value: number;
 }
 
 interface TooltipProps {
     active: boolean;
-    payload: PayloadType[];
+    payload: TooltipPayload[];
 }
 
-interface GenderInfoProps {
-    gender: MaritalStatus;
-    genderName: string;
-    total: number;
-}
-
-const statusToIcon = (status: keyof MaritalStatus) => {
-    const statusMap = {
-        Single: faRibbon,
-        Married: faRing,
-        Widowed: faWindowClose,
-        Divorced: faHeartBroken,
-    };
-    return statusMap[status] || faChartPie;
-};
-
-const calcPercentage = (count: number, total: number) => ((count / total) * 100).toFixed(2);
-
-const GenderInfo: React.FC<GenderInfoProps> = ({ gender, genderName, total }) => {
-    const iconColor = genderName === "Male" ? "lightskyblue" : "pink";
-    const icon = genderName === "Male" ? faMale : faFemale;
-
-    const totalCount = Object.values(gender).reduce((a, b) => a + b, 0);
-
-    return (
-        <GenderInfoStyles>
-            <TooltipInnerContainer>
-                <TotalStyles>
-                    <IconStyles>
-                        <FontAwesomeIcon icon={icon} style={{ color: iconColor }} />
-                    </IconStyles>
-                    <DescStyles>
-                        {`Total ${genderName} : ${totalCount} (${((totalCount / total) * 100).toFixed(2)}%)`}
-                    </DescStyles>
-                </TotalStyles>
-                {Object.entries(gender).map(([status, count]) => {
-                    const maritalStatus = status as keyof MaritalStatus;
-                    return (
-                        <DescStyles key={status}>
-                            <IconStyles>
-                                <FontAwesomeIcon icon={statusToIcon(maritalStatus)} style={{ color: iconColor }} />
-                            </IconStyles>
-                            {`${status} : ${count} (${calcPercentage(count, total)}%)`}
-                        </DescStyles>
-                    );
-                })}
-            </TooltipInnerContainer>
-        </GenderInfoStyles>
-    );
-};
-
-export const CustomTooltipAgeGender: React.FC<TooltipProps> = ({active, payload}) => {
+export const CustomAgeGenderTooltip: React.FC<TooltipProps> = ({active, payload}) => {
     if (active && payload?.length) {
         const malePayload = payload[0].payload.Male ?? {Single: 0, Married: 0, Widowed: 0, Divorced: 0};
         const femalePayload = payload[0].payload.Female ?? {Single: 0, Married: 0, Widowed: 0, Divorced: 0};
@@ -170,8 +98,9 @@ export const CustomTooltipAgeGender: React.FC<TooltipProps> = ({active, payload}
             Object.values(femalePayload).reduce((a, b) => a + b, 0);
 
         return (
-            <TooltipContainer>
-                <TooltipInnerContainer>
+    <div>
+            <TooltipWrapper>
+                <TooltipContent>
                     <LabelStyles>
                         <IconStyles>
                             <FontAwesomeIcon icon={faChartPie}/>
@@ -180,12 +109,15 @@ export const CustomTooltipAgeGender: React.FC<TooltipProps> = ({active, payload}
                     </LabelStyles>
                     <DescStyles>{`Total : ${total}`}</DescStyles>
                     <TooltipSections>
-                        <GenderInfo gender={malePayload} genderName="Male" total={total}/>
-                        <GenderInfo gender={femalePayload} genderName="Female" total={total}/>
+                        <GenderDetails gender={malePayload} genderName="Male" total={total}/>
+                        <GenderDetails gender={femalePayload} genderName="Female" total={total}/>
                     </TooltipSections>
-                </TooltipInnerContainer>
-            </TooltipContainer>
+                </TooltipContent>
+            </TooltipWrapper>
+    </div>
         );
     }
     return null;
 };
+
+export default CustomAgeGenderTooltip;

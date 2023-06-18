@@ -8,6 +8,7 @@ import {
 import styled, { createGlobalStyle } from 'styled-components';
 import { PopulationPieChartProps } from "../../types/Parts";
 import React from "react";
+import {COLORS} from "../../../../../styles/styles";
 
 interface LabelProps {
     cx: number,
@@ -27,33 +28,75 @@ const GlobalFonts = createGlobalStyle`
 const ChartContainer = styled.div`
   background: #282c34;
   border-radius: 10px;
-  height: 100vh;
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 90vh;
+  width: 90vw;
+  max-width: 1080px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    height: 80vh;
+    width: 95%;
+  }
+
+  @media (max-width: 768px) {
+    height: 70vh;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    height: 60vh;
+    width: 100%;
+  }
+  @media (max-width: 320px) {
+    height: 50vh;
+    width: 100%;
+  }
+  @media (max-width: 280px) {
+    height: 40vh;
+    width: 100%;
+  }
+  @media (max-width: 240px) {
+    height: 30vh;
+    width: 100%;
+  }
 `;
 
 const ChartTitle = styled.h2`
   font-family: 'Roboto', sans-serif;
   color: #d3bcbc;
   text-align: center;
-  margin-bottom: 1px;
-  font-size: 2em; /* adjust as necessary */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* adjust as necessary */
-  line-height: 1.2; /* adjust as necessary */
-  letter-spacing: 0.05em; /* adjust as necessary */
+  margin-bottom: 1em;
   transition: font-size 0.3s ease;
+  font-size: calc(1em + 1vw);
 
+  @media (max-width: 1280px) {
+    font-size: calc(1em + 1vw);
+  }
+    @media (max-width: 1024px) {
+    font-size: calc(1em + 0.8vw);
+    }
   @media (max-width: 768px) {
-    font-size: 1.5em; /* adjust for smaller screens */
+    font-size: calc(1em + 0.5vw);
   }
-  
+
   @media (max-width: 480px) {
-    font-size: 1em; /* adjust for even smaller screens */
+    font-size: 1em;
   }
+  @media (max-width: 320px) {
+    font-size: 0.8em;
+    
+  }
+    @media (max-width: 280px) {
+    font-size: 0.6em;
+    }
+    @media (max-width: 240px) {
+    font-size: 0.4em;
+    }
 `;
-export const COLORS = ['#FFD700', '#008000', '#696969', '#DC143C'];
+
 // Customized Label component
 const renderCustomizedLabel: React.FC<LabelProps & {name: string}> = ({
                                                                           cx,
@@ -88,7 +131,7 @@ export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({chartTitl
         <GlobalFonts />
         <ChartTitle>{chartTitle}</ChartTitle>
         <ChartContainer>
-            <ResponsiveContainer width="80%" height="80%">
+            <ResponsiveContainer>
                 <PieChart>
                     <Pie
                         dataKey="value"

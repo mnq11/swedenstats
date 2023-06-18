@@ -38,7 +38,7 @@ const TooltipInnerContainer = styled.div`
   }
 `;
 
-const LabelStyles = styled.p`
+const LabelStyles = styled.div`
   color: ${LIGHT_GRAY};
   font-weight: bold;
   font-size: 1.5em;
@@ -46,7 +46,7 @@ const LabelStyles = styled.p`
 
 `;
 
-const DescStyles = styled.p`
+const DescStyles = styled.div`
   color: ${WHITE};
   margin-bottom: 0;
   font-size: 1.2em;

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import PopulationStatistics from "./PopulationStatistics/PopulationStatistics";
 import SvgMap from "./Map/SvgMap";
+import { ThemeProvider } from 'styled-components';
+import {darkMode} from "../../styles/styles";
 
 export const countiesData = require('../../Model/CountiesData.json') as CountiesData;
+
 export interface MunicipalityData {
     Code: string;
     Municipality: string;
@@ -13,28 +16,41 @@ export interface MunicipalityData {
 export interface CountiesData {
     [key: string]: MunicipalityData[];
 }
+
 const DashboardContainer = styled.div`
-  width: 100%;
-  max-width: 1200px;
+  width: 100vw;
+  height: 100%; // use viewport height instead of 100%
   background-color: #282c34;
   padding: 20px;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif ;
-  border-radius: 20px; 
-
-  transition: all 0.3s ease; 
-
-  @media (max-width: 768px) {
-    padding: 15px;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 2rem;
+    width: 100vw;
+    height: 100%;
   }
+  @media (max-width: 600px) {
+    padding: 10px;
+    width: 100vw;
+    height: 100%;
 
-  @media (min-width: 769px) and (max-width: 1024px) {
-    padding: 25px;
   }
+`;
 
-  @media (min-width: 1025px) {
-    padding: 35px;
-  }
+
+
+const StyledComponent = styled.div`
+  margin-bottom: 20px;
+  
 `;
 
 const Dashboard = () => {
@@ -46,14 +62,19 @@ const Dashboard = () => {
     };
 
     const handleClick = (code: string) => {
-        setMunicipality(code);
+        // setMunicipality(code);
     };
 
     return (
-        <DashboardContainer>
-            <PopulationStatistics county={county} setCounty={setCounty} municipality={municipality} setMunicipality={setMunicipality} />
-            <SvgMap data={countiesData[county]} handleMouseOver={handleMouseOver} handleClick={handleClick} />
-        </DashboardContainer>
+        <ThemeProvider theme={darkMode}>
+            <DashboardContainer>
+                    <PopulationStatistics county={county} setCounty={setCounty} municipality={municipality} setMunicipality={setMunicipality} />
+                {/*<StyledComponent>*/}
+                {/*    <SvgMap data={countiesData[county]} handleMouseOver={handleMouseOver} handleClick={handleClick} />*/}
+                {/*</StyledComponent>*/}
+            </DashboardContainer>
+        </ThemeProvider>
     );
 };
+
 export default Dashboard;
