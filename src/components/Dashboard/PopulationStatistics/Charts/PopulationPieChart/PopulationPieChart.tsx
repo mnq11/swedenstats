@@ -7,7 +7,7 @@ import {
 } from 'recharts';
 import styled, { createGlobalStyle } from 'styled-components';
 import { PopulationPieChartProps } from "../../types/Parts";
-import React from "react";
+import React, {useState} from "react";
 import {COLORS} from "../../../../../styles/styles";
 
 interface LabelProps {
@@ -126,36 +126,51 @@ const renderCustomizedLabel: React.FC<LabelProps & {name: string}> = ({
     );
 };
 
-export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({chartTitle, chartData, CustomTooltip}) => (
-    <>
-        <GlobalFonts />
-        <ChartTitle>{chartTitle}</ChartTitle>
-        <ChartContainer>
-            <ResponsiveContainer>
-                <PieChart>
-                    <Pie
-                        dataKey="value"
-                        isAnimationActive={true}
-                        data={chartData}
-                        cx="50%"
-                        cy="50%"
-                        outerRadius="70%"
-                        fill="#8884d8"
-                        labelLine={false}
-                        label={renderCustomizedLabel}
-                    >
-                        {chartData.map((entry, index) => (
-                            <Cell
-                                key={`cell-${index}`}
-                                fill={COLORS[index % COLORS.length]}
-                                stroke="#282c34"
-                                strokeWidth={2}
-                            />
-                        ))}
-                    </Pie>
-                    {CustomTooltip && <Tooltip content={<CustomTooltip />}/>}
-                </PieChart>
-            </ResponsiveContainer>
-        </ChartContainer>
-    </>
-);
+
+
+export const PopulationPieChart: React.FC<PopulationPieChartProps> = ({chartTitle, chartData, CustomTooltip}) => {
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const [showTooltip, setShowTooltip] = useState<boolean>(false);
+
+    const onPieClick = (data: any, index: number) => {
+        setActiveIndex(activeIndex === index ? null : index);
+        setShowTooltip(!showTooltip); // toggles the state of showTooltip
+    };
+
+    return (
+        <>
+            <GlobalFonts />
+            <ChartTitle>{chartTitle}</ChartTitle>
+            <ChartContainer>
+                <ResponsiveContainer>
+                    <PieChart>
+                        <Pie
+                            dataKey="value"
+                            isAnimationActive={true}
+                            data={chartData}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius="70%"
+                            fill="#8884d8"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                        >
+                            {chartData.map((entry, index) => (
+                                <Cell
+                                    key={`cell-${index}`}
+                                    fill={COLORS[index % COLORS.length]}
+                                    stroke={activeIndex === index ? 'white' : '#282c34'}
+                                    strokeWidth={activeIndex === index ? 4 : 2}
+                                    strokeOpacity={activeIndex === index ? 1 : 0.3}
+                                    onClick={(e) => onPieClick(e, index)}
+                                    cursor='pointer'
+                                />
+                            ))}
+                        </Pie>
+                        {showTooltip && CustomTooltip && <Tooltip content={<CustomTooltip active={activeIndex !== null} payload={activeIndex !== null ? [chartData[activeIndex]] : []} showTooltip={showTooltip}/>}/>}
+                    </PieChart>
+                </ResponsiveContainer>
+            </ChartContainer>
+        </>
+    );
+};

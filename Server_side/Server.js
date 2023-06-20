@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.post('/stats', async (req, res) => {
     const { Region, Civilstand, Alder, Kon, Tid } = req.body;
-    console.log("The client request : ", Region , Civilstand , Alder , Kon , Tid);
+    // console.log("The client request : ", Region , Civilstand , Alder , Kon , Tid);
     const query = {
         "query": [
             {
@@ -83,7 +83,7 @@ app.post('/stats', async (req, res) => {
         res.status(response.status).send(text);
     } else {
         const data = await response.json();
-        console.log('Data from API:', data);
+        // console.log('Data from API:', data);
         res.send(data);
     }
 });

@@ -3,13 +3,10 @@ import React from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMale, faFemale, faChartPie} from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
+import {COLORS} from "../../../../../styles/styles";
 
 // Constants
 const DARK_BACKGROUND = 'rgba(0, 0, 0, 0.86)';
-const LIGHT_GRAY = '#efefef';
-const WHITE = '#ffffff';
-const LIGHT_SKY_BLUE = 'lightskyblue';
-const PINK = 'pink';
 
 // Styled Components
 const TooltipContainer = styled.div`
@@ -21,7 +18,7 @@ const TooltipInnerContainer = styled.div`
   padding: 10px;
   font-size: 1em;
   line-height: 1.2em;
-  color: ${WHITE};
+  color: inherit;
   margin-bottom: 10px;
   transition: all 0.3s ease;
 
@@ -38,24 +35,43 @@ const TooltipInnerContainer = styled.div`
   }
 `;
 
-const LabelStyles = styled.div`
-  color: ${LIGHT_GRAY};
+const statusColors = {
+    Single: COLORS[0],
+    Married: COLORS[1],
+    Widowed: COLORS[2],
+    Divorced: COLORS[3]
+};
+
+const LabelStyles = styled.div<{ status: keyof typeof statusColors }>`
+  color: ${props => statusColors[props.status] || 'inherit'};
   font-weight: bold;
   font-size: 1.5em;
   margin-bottom: 5px; // adjust this as necessary
-
 `;
 
 const DescStyles = styled.div`
-  color: ${WHITE};
+  color: inherit;
   margin-bottom: 0;
   font-size: 1.2em;
-
 `;
 
 const IconStyles = styled.div`
   margin-right: 5px;
   display: inline-block;
+  color: inherit;
+`;
+
+const PercentStyles = styled.span`
+  font-size: 0.8em;
+  color: inherit;
+  font-style: italic;
+  margin-left: 5px;
+`;
+
+const AgeGroupStyles = styled.div`
+  font-size: 0.9em;
+  color: inherit;
+  margin: 3px 0;
 `;
 
 const FlexContainer = styled.div`
@@ -71,46 +87,65 @@ export const CustomTooltipMaritalStatus: React.FC<{ active: boolean, payload: Pa
             const maleAgesArray = Object.entries(maleAgeGroups);
             const femaleAgesArray = Object.entries(femaleAgeGroups);
 
+            const malePercent = ((maleCount/value)*100).toFixed(2);
+            const femalePercent = ((femaleCount/value)*100).toFixed(2);
+
+            // @ts-ignore
+            const statusColor = statusColors[name] || 'inherit';
+
             return (
                 <TooltipContainer>
-                    <TooltipInnerContainer>
-                        <LabelStyles>
+                    <TooltipInnerContainer style={{color: statusColor}}>
+                        <LabelStyles status={name}>
                             <IconStyles><FontAwesomeIcon icon={faChartPie} /></IconStyles>
                             {`Status: ${name}`}
                         </LabelStyles>
+
                         <DescStyles>{`Total: ${value}`}</DescStyles>
                         <FlexContainer>
-                            <TooltipInnerContainer>
+                            <TooltipInnerContainer style={{color: statusColor}}>
                                 <DescStyles>
                                     <IconStyles>
-                                        <FontAwesomeIcon style={{color: LIGHT_SKY_BLUE}} icon={faMale}/>
+                                        <FontAwesomeIcon style={{color: 'lightskyblue'}} icon={faMale}/>
                                     </IconStyles>
                                     {`Males: ${maleCount}`}
+                                    <PercentStyles>({malePercent}%)</PercentStyles>
                                 </DescStyles>
-                                {maleAgesArray.map(([ageRange, count], index) => (
-                                    <div key={index}>
-                                        <DescStyles>
-                                            <IconStyles><FontAwesomeIcon style={{color: LIGHT_SKY_BLUE}} icon={faMale}/></IconStyles>
-                                            {`(${ageRange})   ${count}`}
-                                        </DescStyles>
-                                    </div>
-                                ))}
+                                {maleAgesArray.map(([ageRange, count], index) => {
+                                    // @ts-ignore
+                                    const ageGroupPercent = ((count/maleCount)*100).toFixed(2);
+                                    return (
+                                        <AgeGroupStyles key={index}>
+                                            <DescStyles>
+                                                <IconStyles><FontAwesomeIcon style={{color: 'lightskyblue'}} icon={faMale}/></IconStyles>
+                                                {`(${ageRange})   ${count}`}
+                                                <PercentStyles>({ageGroupPercent}%)</PercentStyles>
+                                            </DescStyles>
+                                        </AgeGroupStyles>
+                                    )
+                                })}
                             </TooltipInnerContainer>
-                            <TooltipInnerContainer>
+                            <TooltipInnerContainer style={{color: statusColor}}>
                                 <DescStyles>
                                     <IconStyles>
-                                        <FontAwesomeIcon style={{color: PINK}} icon={faFemale}/>
+                                        <FontAwesomeIcon style={{color: 'pink'}} icon={faFemale}/>
                                     </IconStyles>
                                     {`Females: ${femaleCount}`}
+                                    <PercentStyles>({femalePercent}%)</PercentStyles>
                                 </DescStyles>
-                                {femaleAgesArray.map(([ageRange, count], index) => (
-                                    <div key={index}>
-                                        <DescStyles>
-                                            <IconStyles><FontAwesomeIcon style={{color: PINK}} icon={faFemale}/></IconStyles>
-                                            {`(${ageRange})   ${count}`}
-                                        </DescStyles>
-                                    </div>
-                                ))}
+                                {femaleAgesArray.map(([ageRange, count], index) => {
+                                    // @ts-ignore
+                                    const ageGroupPercent = ((count/femaleCount)*100).toFixed(2);
+                                    return (
+                                        <AgeGroupStyles key={index}>
+                                            <DescStyles>
+                                                <IconStyles><FontAwesomeIcon style={{color: 'pink'}} icon={faFemale}/></IconStyles>
+                                                {`(${ageRange})   ${count}`}
+                                                <PercentStyles>({ageGroupPercent}%)</PercentStyles>
+                                            </DescStyles>
+                                        </AgeGroupStyles>
+                                    )
+                                })}
                             </TooltipInnerContainer>
                         </FlexContainer>
                     </TooltipInnerContainer>
