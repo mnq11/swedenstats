@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMale, faFemale, faChartPie} from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
 import {COLORS} from "../../../../../styles/styles";
-import PercentageBar from "./PercentageBar";
+import PercentageBar from "../bars/PercentageBar";
 
 // Constants
 const DARK_BACKGROUND = 'rgba(0, 0, 0, 0.86)';

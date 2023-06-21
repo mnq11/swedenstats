@@ -23,25 +23,12 @@ const ProgressBarFill = styled.div<PercentageBarProps>`
   transition: width 0.3s ease-in-out;
 `;
 
-// A helper function to calculate the luminance of the color
-const getLuminance = (color: string) => {
-    let c = color.substring(1);
-    let rgb = parseInt(c, 16);   // convert rrggbb to decimal
-    let r = (rgb >> 16) & 0xff;  // extract red
-    let g = (rgb >>  8) & 0xff;  // extract green
-    let b = (rgb >>  0) & 0xff;  // extract blue
-
-    let luma = 0.2126*r + 0.7152*g + 0.0722*b; // per ITU-R BT.709
-
-    return luma;
-}
-
 const ProgressBarLabel = styled.span<PercentageBarProps>`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: ${props => getLuminance(props.percentage > 50 ? '#9ACD32' : '#FF6347') > 140 ? 'black' : 'white'};
+  color: white;
   font-weight: bold;
 `;
 

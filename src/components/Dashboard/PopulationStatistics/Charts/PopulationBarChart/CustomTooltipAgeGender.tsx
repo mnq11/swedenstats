@@ -17,7 +17,9 @@ const TooltipWrapper  = styled.div`
   margin-bottom: 10px;
   transition: all 0.3s ease;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media (max-width: 600px) {
   padding: 10px;
     }
@@ -38,9 +40,11 @@ const TooltipContent   = styled.div`
 `;
 const TooltipSections = styled.div`
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: space-between;
+ 
+  width: 100%; // Use full width
 `;
 
 const LabelStyles = styled.div`
@@ -62,6 +66,15 @@ const IconStyles = styled.span`
   margin-right: 8px;
   display: inline-block;
   vertical-align: middle;
+`;
+
+const GenderDetailsContainer = styled.div`
+  width: 45%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: ${darkMode.backgroundColor};
+  box-sizing: border-box; // Include padding and border in element's total width
+  
 `;
 
 interface MaritalStatus {
