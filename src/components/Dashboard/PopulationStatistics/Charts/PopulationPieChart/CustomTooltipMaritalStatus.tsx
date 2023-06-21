@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMale, faFemale, faChartPie} from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
 import {COLORS} from "../../../../../styles/styles";
+import PercentageBar from "./PercentageBar";
 
 // Constants
 const DARK_BACKGROUND = 'rgba(0, 0, 0, 0.86)';
@@ -21,15 +22,12 @@ const TooltipInnerContainer = styled.div`
   color: inherit;
   margin-bottom: 10px;
   transition: all 0.3s ease;
-
   @media (max-width: 768px) {
     padding: 5px;
   }
-
   @media (min-width: 769px) and (max-width: 1024px) {
     padding: 10px;
   }
-
   @media (min-width: 1025px) {
     padding: 15px;
   }
@@ -46,7 +44,7 @@ const LabelStyles = styled.div<{ status: keyof typeof statusColors }>`
   color: ${props => statusColors[props.status] || 'inherit'};
   font-weight: bold;
   font-size: 1.5em;
-  margin-bottom: 5px; // adjust this as necessary
+  margin-bottom: 5px;
 `;
 
 const DescStyles = styled.div`
@@ -68,20 +66,52 @@ const PercentStyles = styled.span`
   margin-left: 5px;
 `;
 
-const AgeGroupStyles = styled.div`
-  font-size: 0.9em;
-  color: inherit;
-  margin: 3px 0;
-`;
-
 const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
+
+
+
+const AgeGroupContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 5px;
+`;
+
+const AgeGroupDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+const AgeGroupLabel = styled.div`
+  font-size: 0.75em;
+  font-weight: bold;
+  padding-right: 5px;
+`;
+
+const AgeGroupCount = styled.div`
+  font-size: 0.75em;
+  padding-left: 5px;
+`;
+const SectionStyled = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+`;
+
 export const CustomTooltipMaritalStatus: React.FC<{ active: boolean, payload: PayloadType[], label: string }> =
     ({active, payload}): JSX.Element | null => {
-        if (active && payload[0]) {
+        if (active && payload && payload[0] && payload[0].payload) {
             // @ts-ignore
             const { maleAgeGroups = {}, femaleAgeGroups = {}, maleCount, femaleCount, name, value } = payload[0].payload;
             const maleAgesArray = Object.entries(maleAgeGroups);
@@ -96,14 +126,17 @@ export const CustomTooltipMaritalStatus: React.FC<{ active: boolean, payload: Pa
             return (
                 <TooltipContainer>
                     <TooltipInnerContainer style={{color: statusColor}}>
-                        <LabelStyles status={name}>
-                            <IconStyles><FontAwesomeIcon icon={faChartPie} /></IconStyles>
-                            {`Status: ${name}`}
-                        </LabelStyles>
+                        <SectionStyled>
+                            <LabelStyles status={name}>
+                                <IconStyles><FontAwesomeIcon icon={faChartPie} /></IconStyles>
+                                {`Status: ${name}`}
+                            </LabelStyles>
 
-                        <DescStyles>{`Total: ${value}`}</DescStyles>
+                            <DescStyles>{`Total: ${value}`}</DescStyles>
+                        </SectionStyled>
+
                         <FlexContainer>
-                            <TooltipInnerContainer style={{color: statusColor}}>
+                            <SectionStyled>
                                 <DescStyles>
                                     <IconStyles>
                                         <FontAwesomeIcon style={{color: 'lightskyblue'}} icon={faMale}/>
@@ -111,21 +144,22 @@ export const CustomTooltipMaritalStatus: React.FC<{ active: boolean, payload: Pa
                                     {`Males: ${maleCount}`}
                                     <PercentStyles>({malePercent}%)</PercentStyles>
                                 </DescStyles>
+
                                 {maleAgesArray.map(([ageRange, count], index) => {
-                                    // @ts-ignore
-                                    const ageGroupPercent = ((count/maleCount)*100).toFixed(2);
+                                    const agePercent = (((count as number) || 0) / maleCount * 100).toFixed(2);
                                     return (
-                                        <AgeGroupStyles key={index}>
-                                            <DescStyles>
-                                                <IconStyles><FontAwesomeIcon style={{color: 'lightskyblue'}} icon={faMale}/></IconStyles>
-                                                {`(${ageRange})   ${count}`}
-                                                <PercentStyles>({ageGroupPercent}%)</PercentStyles>
-                                            </DescStyles>
-                                        </AgeGroupStyles>
-                                    )
+                                        <AgeGroupContainer key={`${ageRange}-${index}`}>
+                                            <AgeGroupDetails>
+                                                <AgeGroupLabel>{`Age Range: ${ageRange}`}</AgeGroupLabel>
+                                                <AgeGroupCount>{`Number of People: ${(count as number) || 'N/A'}`}</AgeGroupCount>
+                                            </AgeGroupDetails>
+                                            <PercentageBar percentage={parseFloat(agePercent)} />
+                                        </AgeGroupContainer>
+                                    );
                                 })}
-                            </TooltipInnerContainer>
-                            <TooltipInnerContainer style={{color: statusColor}}>
+                            </SectionStyled>
+
+                            <SectionStyled>
                                 <DescStyles>
                                     <IconStyles>
                                         <FontAwesomeIcon style={{color: 'pink'}} icon={faFemale}/>
@@ -133,20 +167,21 @@ export const CustomTooltipMaritalStatus: React.FC<{ active: boolean, payload: Pa
                                     {`Females: ${femaleCount}`}
                                     <PercentStyles>({femalePercent}%)</PercentStyles>
                                 </DescStyles>
+
+
                                 {femaleAgesArray.map(([ageRange, count], index) => {
-                                    // @ts-ignore
-                                    const ageGroupPercent = ((count/femaleCount)*100).toFixed(2);
+                                    const agePercent = (((count as number) || 0) / femaleCount * 100).toFixed(2);
                                     return (
-                                        <AgeGroupStyles key={index}>
-                                            <DescStyles>
-                                                <IconStyles><FontAwesomeIcon style={{color: 'pink'}} icon={faFemale}/></IconStyles>
-                                                {`(${ageRange})   ${count}`}
-                                                <PercentStyles>({ageGroupPercent}%)</PercentStyles>
-                                            </DescStyles>
-                                        </AgeGroupStyles>
-                                    )
+                                        <AgeGroupContainer key={`${ageRange}-${index}`}>
+                                            <AgeGroupDetails>
+                                                <AgeGroupLabel>{`Age Range: ${ageRange}`}</AgeGroupLabel>
+                                                <AgeGroupCount>{`Number of People: ${(count as number) || 'N/A'}`}</AgeGroupCount>
+                                            </AgeGroupDetails>
+                                            <PercentageBar percentage={parseFloat(agePercent)} />
+                                        </AgeGroupContainer>
+                                    );
                                 })}
-                            </TooltipInnerContainer>
+                            </SectionStyled>
                         </FlexContainer>
                     </TooltipInnerContainer>
                 </TooltipContainer>
